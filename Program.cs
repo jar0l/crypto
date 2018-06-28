@@ -7763,14 +7763,14 @@ namespace crypto
             (
                   "\n {f:14}Usage:\n\n\t{f:7}crypto [options...] input-file-name\n"                       +
                   "\n {f:14}Options:\n\n"                                                                 +
-                  "{f:15}\t-m  --mode\t    {t:30,f:7}Algorithm mode. Use the combined help with this "    +
-                  "modifier to list or for more info.{t:0,f:15}\n"                                        +
-                  "\t-e  --encrypt-encode  {t:30,f:7}Encrypt or encode operation indicator."              +
-                  "{t:0,f:15}\n\t-d  --decrypt-decode  {t:30,f:7}Decrypt or decode operation indicator."  +
+                  "{f:15}\t-m  --mode\t    {t:30,f:7}Algorithm mode. You can use the help combined with " +
+                  "this modifier to list the available modes.{ t:0,f:15}\n"                               +
+                  "\t-e  --enc             {t:30,f:7}Encrypt or encode operation indicator."              +
+                  "{t:0,f:15}\n\t-d  --dec             {t:30,f:7}Decrypt or decode operation indicator."  +
                   "{t:0,f:15}\n\t-2  --b32-hex         {t:30,f:7}For B32 mode. Uses The extended hex "    +
-                  "alphabet.{t:0,f:15}\n\t-8  --no-rfc4648      {t:30,f:7}For B32 and B64 modes. Coding"  +
-                  " without the RFC4648 specification.{t:0,f:15}\n"                                       +
-                  "\t-1  --base-code       {t:30,f:7}Custom characters to be coding in BaseN without "    +
+                  "alphabet.{t:0,f:15}\n\t-8  --no-rfc4648      {t:30,f:7}For B32 and B64 modes. "        +
+                  "Encoding without the RFC4648 specification.{t:0,f:15}\n"                               +
+                  "\t-1  --base-code       {t:30,f:7}Custom characters to be encoding in BaseN without "  +
                   "RFC4648 specification. The length must be equal to or greater than the specified base" +
                   " number.{t:0,f:15}\n"                                                                  +
                   "\t-6  --base-line-wrap  {t:30,f:7}Number of characters to adjust the lines for BaseN"  +
@@ -7780,9 +7780,11 @@ namespace crypto
                   " 255 from B7 to B15, and 256 for all others.{t:0,f:15}\n"                              +
                   "\t-5  --rounds\t  {t:30,f:7}For RC5, SALSA20, and CHACHA the number of rounds should " +
                   "be a integer value (20 by default).{t:0,f:15}\n"                                       +
-                  "\t-4  --rc5-64b\t {t:30,f:7}For RC5 mode. Uses a 64 bits word.{t:0,f:15}\n"            +
-                  "\t-3  --vmpc-ksa3       {t:30,f:7}For VMPC mode. Uses the Key Scheduling Algorithm."   +
-                  "{t:0,f:15}\n\t-x  --max-buffer-size {t:30,f:7}Maximum buffer size in bytes for read "  +
+                  "\t-4  --rc5-64b\t {t:30,f:7}For RC5 mode. It indicates that 64-bit word should be "    +
+                  "used.{t:0,f:15}\n"                                                                     +
+                  "\t-3  --vmpc-ksa3       {t:30,f:7}For VMPC mode. It indicates that the Key Scheduling" +
+                  " Algorithm should be used.{t:0,f:15}\n"                                                +
+                  "\t-x  --max-buffer-size {t:30,f:7}Maximum buffer size in bytes for read "              +
                   "and write. Modes: All symmetric ciphers and PGP. The default value is 1024."           +
                   "{t:0,f:15}\n\t-k  --key\t     {t:30,f:7}The key characters must have a key size "      +
                   "length divided by 8. It must be accompanied by the initial vector in the "             +
@@ -7790,34 +7792,34 @@ namespace crypto
                   ", and iterations. Modes: All symmetric ciphers. This modifier supports "               +
                   "hexadecimal byte notation by the escape characters \\x (two-digit) and \\u for"        +
                   " Unicode (four-digit).{t:0,f:15}\n"                                                    +
-                  "\t-i  --initial-vector  {t:30,f:7}Needs to be 16 characters for AES, 3DES, DES, RC2, " +
-                  "3FISH, and MARS. SALSA20 requires exactly 8 characters. The RIJNDAEL long must be "    +
-                  "equal to the block size divided by 8. With VMPC the value should be between 1 and 768" +
-                  " depending on the block size. This modifier supports hexadecimal byte notation by the" +
-                  "  escape characters \\x (two-digit) and \\u for Unicode (four-digit)."                 + 
+                  "\t-i  --initial-vector  {t:30,f:7}It Needs to be 16 characters for AES, 3DES, DES, "   +
+                  "RC2, 3FISH, and MARS. SALSA20 requires exactly 8 characters. The RIJNDAEL long must "  +
+                  "be equal to the block size divided by 8. With VMPC the value should be between 1 and " +
+                  "768 depending on the block size. This modifier supports hexadecimal byte notation by " +
+                  "the escape characters \\x (two-digit) and \\u for Unicode (four-digit)."               + 
                   "{t:0,f:15}\n"                                                                          +
-                  "\t-p  --password\t{t:30,f:7}Word, phrase or file. Modes: All symmetric ciphers  and "  +
+                  "\t-p  --password\t{t:30,f:7}Word, phrase or file. Modes: All symmetric ciphers and "   +
                   "PGP private key or x509 certificates (*.pfx or *.pem). This modifier supports "        +
                   "hexadecimal byte notation by the escape characters \\x (two-digit) and \\u for"        +
                   " Unicode (four-digit) with symmetric ciphers.{t:0,f:15}\n"                             +
                   "\t-s  --salt\t    {t:30,f:7}At least 8 characters. Modes: All symmetric ciphers."      +
                   "{t:0,f:15}\n"                                                                          +
                   "\t-h  --hash\t    {t:30,f:7}Hash algorithm. Modes: DIGEST, CHECKSUM, all symmetric "   +
-                  " ciphers, ECIES, DLIES, and ELGAMAL or RSA with OAEP (Bouncy Castle). Use  the help "  +
-                  "combined with this modifier to list or for more info.{t:0,f:15}\n"                     +
-                  "\t-t  --iterations      {t:30,f:7}Number of iterations to do. Range from 1 to "        +
-                  "2,147,483,647 (1000 by default). Bear in mind that a greater number of iterations "    +
-                  "implies a slower process. Modes: All symmetric ciphers.{t:0,f:15}\n"                   +
+                  "ciphers, ECIES, DLIES, and ELGAMAL or RSA with OAEP (Bouncy Castle). You can use the"  +
+                  " help combined with this modifier to list the available hashes or for more info."      +
+                  "{t:0,f:15}\n\t-t  --iterations      {t:30,f:7}Number of iterations to do. Range from"  +
+                  " 1 to 2147483647 (1000 by default). You have to bear in mind that a greater number of" +
+                  " iterations implies a slower process. Modes: All symmetric ciphers.{t:0,f:15}\n"       +
                   "\t-c  --cipher-mode     {t:30,f:7}CBC (Cipher Block Chianing) by default for all"      +
                   " symmetric block ciphers. The cipher modes CFB (Cipher feedback), or OFB (Output "     +
                   "feedback) are valid for all block ciphers except AES. Other cipher modes like ECB "    +
-                  "(Electronic Code Book), or CTS (Cipher Text Stealing) are only valid for RC2, 3DES, "  + 
-                  "DES, MARS, AES, and RIJNDAEL with iv.{t:0,f:15}\n"                                     +
+                  "(Electronic Code Book), or CTS (Cipher Text Stealing) are only valid for RC2, 3DES, "  +
+                  "DES, MARS, AES, and RIJNDAEL with initial vector.{t:0,f:15}\n"                         +
                   "\t-n  --padding\t {t:30,f:7}X923, ZEROS, ISO10126, or PKCS7 (by default). Modes: "     + 
                   "3FISH, AES, 3DES, DES, RC2, and RIJNDAEL. MARS only support PKCS7, and the others "    +
                   "block ciphers also support ISO7816D4 or TBC but no ZEROS padding mode. RSA and "       +
-                  "ELGAMAL support PKCS1 (by default) and ISO9796D1 for RSA with Bouncy Castle."          + 
-                  "{t:0,f:15}\n"                                                                          +
+                  "ELGAMAL support PKCS1 (by default) and ISO9796D1 is supported only by RSA with Bouncy" +
+                  " Castle.{t:0,f:15}\n"                                                                  +
                   "\t-r  --random-gen      {t:30,f:7}Random password and salt generator. Modes: All "     +
                   "symmetric ciphers.{t:0,f:15}\n"                                                        +
                   "\t-l  --block-size      {t:30,f:7}The RIJNDAEL legal values: 128, 160, 192, 224, and " +
@@ -7826,8 +7828,8 @@ namespace crypto
                   "\t-z  --feedback-size   {t:30,f:7}For RIJNDAEL only. The feedback size determines the" +
                   " amount of data that is fed back to successive encryption or decryption operations. "  +
                   "The feedback size cannot be greater than the block size.{t:0,f:15}\n"                  +
-                  "\t-y  --key-size\t{t:30,f:7}Key size in bits. Use the help combined with this "        +
-                  "modifier to list or for more info.{t:0,f:15}\n"                                        +
+                  "\t-y  --key-size\t{t:30,f:7}Key size in bits. You can use the help combined with this" +
+                  " modifier for more info.{t:0,f:15}\n"                                                  +
                   "\t-g  --key-pair-gen    {t:30,f:7}Key pair generator. Modes: ECIES, DLIES, ELGAMAL, "  +
                   "NACCACHE, RSA, and PGP. The public and private key file names will be required."       +
                   "{t:0,f:15}\n"                                                                          +
@@ -7838,48 +7840,48 @@ namespace crypto
                   "\t-9  --x509-file       {t:30,f:7}X509 certificate file name. Modes: RSA, PGP, and "   +
                   "all symmetric ciphers.{t:0,f:15}\n"                                                    +
                   "\t-0  --x509-store      {t:30,f:7}X509 common name or thumbprint in the certificate "  +
-                  "store, Modes: RSA, PGP, and all symmetric ciphers.{t:0,f:15}\n"                        +
+                  "store. Modes: RSA, PGP, and all symmetric ciphers.{t:0,f:15}\n"                        +
                   "\t-f  --format\t  {t:30,f:7}For Asymmetric keys. The available formats are: [XML] for" +
                   " intrinsic RSA mode; [B64] for RSA, ELGAMAL, NACCACHE, ECIES, and DLIES modes; "       +
                   "[ARMORED] for PGP mode.{t:0,f:15}\n"                                                   +
                   "\t-a  --oaep\t    {t:30,f:7}For ELGAMAL and RSA. Microsoft CryptoAPI only supports "   +
                   "OAEP since Windows XP for RSA.{t:0,f:15}\n"                                            +
                   "\t-q  --pgp-cipher      {t:30,f:7}Symmetric cipher for PGP encryption: AES128, AES192" +
-                  " ,AES256 (by default), BLOWFISH, 2FISH, CAST5, DES, 3DES, IDEA, CAMELLIA128, "         + 
+                  ", AES256 (by default), BLOWFISH, 2FISH, CAST5, DES, 3DES, IDEA, CAMELLIA128, "         + 
                   "CAMELLIA192, CAMELLIA256, and SAFER.{t:0,f:15}\n"                                      +
                   "\t-u  --crossbreeding   {t:30,f:7}For RSA, ELGAMAL, and PGP. It allows use either "    +
                   "keys from RSA to PGP and PGP to RSA or ELGAMAL to PGP and PGP to ELGAMAL.{t:0,f:15}\n" +
-                  "\t-j  --tell-apart      {t:30,f:7}Sets customized password and salt for each file in " +
-                  "batch process with symmetric ciphers.{t:0,f:15}\n"                                     +
+                  "\t-j  --tell-apart      {t:30,f:7}It sets customized password and salt for each file " +
+                  "in batch process with symmetric ciphers.{t:0,f:15}\n"                                  +
                   "\t-o  --output\t  {t:30,f:7}Output file name or path.{t:0,f:15}\n"                     +
                   "\t-w  --overwrite       {t:30,f:7}Overwrites the existing output file(s) without "     +
                   "asking.{t:0,f:15}\n"                                                                   +
-                  "\t-7  --io-options      {t:30,f:7}Input and output options. Use the help combined "    +
-                  "with this modifier to list or for more info.{t:0,f:15}\n"                              +
-                  "\t--export\t      {t:30,f:7}For RSA, PGP, and ELGAMAL. Exports certificates and keys." + 
-                  " Use the help combined with this modifier to list or for more info.{t:0,f:15}\n"       +
-                  "\t--encoding\t    {t:30,f:7}Character encoding for password, salt, key, and initial "  +
-                  "vector with symmetric ciphers. The available encodings are: ASCII (by default), "      +
+                  "\t-7  --io-options      {t:30,f:7}Input and output options. You can use the help "     +
+                  "combined with this modifier for more info.{t:0,f:15}\n"                                +
+                  "\t--export\t      {t:30,f:7}For RSA, PGP, and ELGAMAL. Exports certificates and keys." +
+                  " You can use the help combined with this modifier for more info.{t:0,f:15}\n"          +
+                  "\t--encoding\t    {t:30,f:7}Character encoding for password, salt, key, and initial"   +
+                  " vector with symmetric ciphers. The available encodings are: ASCII (by default), "     +
                   "UNICODE-LE, UNICODE-BE, UTF-7, UTF-8, and UTF-32.{t:0,f:15}\n"                         +
                   "\t--gost-box\t    {t:30,f:7}Specifies s-box for GOST mode. The available s-boxes are:" +
                   " DEFAULT, E-TEST, E-A, E-B, E-C, E-D, D-TEST, D-A, IV, or empty string for nothing at" +
                   " all.{t:0,f:15}\n"                                                                     +
                   "\t--without-iv-tweak    {t:30,f:7}Without tweak or initial vector if possible for "    +
-                  "symmetric block ciphers. Uses Bouncy Castle.{t:0,f:15}\n"                              +
-                  "\t--rsa-bouncy-castle   {t:30,f:7}Uses the Bouncy Castle for RSA, PGP, and all "       +
+                  "symmetric block ciphers (with Bouncy Castle).{t:0,f:15}\n"                             +
+                  "\t--rsa-bouncy-castle   {t:30,f:7}It uses the Bouncy Castle for RSA, PGP, and all "    +
                   "symmetric ciphers with key exchange (Key pair generation, encription, and decryption)" +
                   ".{t:0,f:15}\n"                                                                         +
                   "\t--public-exponent     {t:30,f:7}Long prime number for RSA or PGP mode with RSA "     +
-                  "algorithm and use of Bouncy Castle (65537 by default). Key pair generation only."      +
+                  "algorithm and use of Bouncy Castle (65537 by default). For key pair generation only."  +
                   "{t:0,f:15}\n"                                                                          +
                   "\t--certainty\t   {t:30,f:7}Percentage of certainty when prime numbers are produced "  +
-                  "with Bouncy Castle. For RSA, PGP, ELGAMAL, NACCACHE, ECDH, and DLIES modes. Key pair " +
-                  "generation only.{t:0,f:15}\n"                                                          +
+                  "with Bouncy Castle. For RSA, PGP, ELGAMAL, NACCACHE, ECDH, and DLIES modes. For key "  +
+                  "pair generation only.{t:0,f:15}\n"                                                     +
                   "\t--small-primes\t{t:30,f:7}Length of small primes for NACCACHE mode (30 by default)." +
                   "{t:0,f:15}\n"                                                                          +
                   "\t--signature\t   {t:30,f:7}Signature for encryption and decription. A file must be "  +
                   "specified and private key is required for RSA mode. You can specify Probabilistic "    +
-                  "Signature Schema (PSS) or ISO9796D2 before the file (RSA mode only). Modes: RSA, "     + 
+                  "Signature Schema (PSS) or ISO9796D2 (for RSA mode only) before the file. Modes: RSA, " + 
                   "NACCACHE, and ELGAMAL.{t:0,f:15}\n"                                                    +
                   "\t--pgp-id\t      {t:30,f:7}Identity for PGP key pair generation.{t:0,f:15}\n"         +
                   "\t--pgp-sha1\t    {t:30,f:7}Uses SHA1 with PGP for key pair generation.{t:0,f:15}\n"   +
@@ -7889,7 +7891,7 @@ namespace crypto
                   "DSA (by default for ELGAMAL), ECDSA (by default for ECDH), and RSA.{t:0,f:15}\n"       +
                   "\t--pgp-signature       {t:30,f:7}Signature for PGP encryption and decription. The "   +
                   "key pair or certificates will be required.{t:0,f:15}\n"                                +
-                  "\t--pgp-compress\t{t:30,f:7}Specifies a compression algorithm for encryption. The "    +
+                  "\t--pgp-compress\t{t:30,f:7}It specifies a compression algorithm for encryption. The " +
                   "available algorithms are: BZIP2, ZIP (by default), ZLIB, and NONE.{t:0,f:15}\n"        +
                   "\t--ies-cipher\t  {t:30,f:7}Symmetric cipher for ECIES and DLIES modes: AES (by "      +
                   "default), RIJNDAEL, SERPENT, TNEPRES, CAMELLIA, GOST, 2FISH, 3FISH, DES, 3DES, RC2, "  +
@@ -7937,7 +7939,7 @@ namespace crypto
                 case MOD_LONG_MODE:
                     Messenger.Print
                     (
-                          "\n Coders:\r\n"                                                      +
+                          "\n Encoding:\r\n"                                                    +
                           "\n\t- Bn (Base n, Where n must be a number from 2 to 64)\n\n"        +
                           "\r Symmetric Block Ciphers:\r\n"                                     +
                           "\n\t- RIJNDAEL"                                                      +
@@ -8083,7 +8085,7 @@ namespace crypto
                           s0 + HASH_RIPEMD160                                               + s3 + s4 + s5 +
                           s0 + HASH_RIPEMD256                                               + s3 + s5      +
                           s0 + HASH_RIPEMD320                                               + s3 +
-                          "\n\n \rOthers (32-bits):\r\n"                                    +
+                          "\n\n \rOthers (32-bit):\r\n"                                     +
                           s0 + HASH_AP                                                      +
                           s0 + HASH_BERNSTEIN                                               +
                           s0 + HASH_BERNSTEIN1                                              +
@@ -8105,12 +8107,12 @@ namespace crypto
                           s0 + HASH_SDBM                                                    +
                           s0 + HASH_SHIFTANDXOR                                             + " (Shift And Xor)" +
                           s0 + HASH_SUPERFAST                                               +
-                          "\n\n \rOthers (64-bits):\r\n"                                    +
+                          "\n\n \rOthers (64-bit):\r\n"                                     +
                           s0 + HASH_FNV64                                                   +
                           s0 + HASH_FNV1A64                                                 +
                           s0 + HASH_MURMUR2_64                                              +
                           s0 + HASH_SIPHASH                                                 +
-                          "\n\n \rOthers (128-bits):\r\n"                                   +
+                          "\n\n \rOthers (128-bit):\r\n"                                    +
                           s0 + HASH_MURMUR3_128                                             +
                           "\n\n \rOthers:\r\n"                                              +
                           s0 + GOST                                                         +
@@ -9343,7 +9345,7 @@ namespace crypto
                           "\tcrypto {t:15}-m ecdh --curve-store x962 --curve prime256v1 -g -b public.key "      +
                           "-v private.key{t:0}\n"                                                               +
                           "\n {f:14}Encryption and decryption:{f:7}\n\n"                                        +
-                          "\tSee {t:8}any example of all symmetric ciphers, Pgp, and Ecies.{t:0}\n"
+                          "\tYou can see {t:8}any example of all symmetric ciphers, Pgp, and Ecies.{t:0}\n"
                     );
                     break;
 
@@ -9524,12 +9526,12 @@ namespace crypto
                         switch (args[i].ToLower())
                         {
                             case "-e":
-                            case "--encrypt-encode":
+                            case "--enc":
                                 _job = CryptoJob.ENCRYPT;
                                 break;
 
                             case "-d":
-                            case "--decrypt-decode":
+                            case "--dec":
                                 _job = CryptoJob.DECRYPT;
                                 break;
 

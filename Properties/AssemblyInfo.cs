@@ -6,12 +6,12 @@ using System.Resources;
 // General Information about an assembly is controlled through the following 
 // set of attributes. Change these attribute values to modify the information
 // associated with an assembly.
-[assembly: AssemblyTitle("Crypto Tool.")]
-[assembly: AssemblyDescription("")]
+[assembly: AssemblyTitle("crypto")]
+[assembly: AssemblyDescription("console crypto tool")]
 [assembly: AssemblyConfiguration("")]
 [assembly: AssemblyCompany("")]
 [assembly: AssemblyProduct("crypto")]
-[assembly: AssemblyCopyright("Copyright © José A. Rojo L. 2013")]
+[assembly: AssemblyCopyright("2018, José A. Rojo L.")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
 
