@@ -33,217 +33,217 @@ For files that are too large, it's recommended to increase the maximum buffer si
 # Options:
 
         -m  --mode            Algorithm mode. You can use the help combined with this 
-			                  modifier to list the available modes.
+			          modifier to list the available modes.
 
         -e  --enc             Encrypt or encode operation indicator.
         -d  --dec             Decrypt or decode operation indicator.
         -2  --b32-hex         For B32 mode. Uses the extended hex alphabet.
         -8  --no-rfc4648      For B32 and B64 modes. Encoding without the RFC4648 
-			                  specification.
+			          specification.
 
         -1  --base-code       Custom characters to be encoding in BaseN without RFC4648 
-			                  specification. The length must be equal to or greater than 
-			                  the specified base number.
+			          specification. The length must be equal to or greater than 
+			          the specified base number.
 
         -6  --base-line-wrap  Number of characters to adjust the lines for BaseN mode. 
-			                  The value must be in increments of 8 characters with B2, 
-			                  6 characters with B3, 4 characters from B4 to B6 (or B64 
-			                  with RFC4648), 3 characters from B7 to B15, and 2 
-			                  characters from B16 to B64 (without RFC4648). The maximum 
-			                  value is 252 for B3, 255 from B7 to B15, and 256 for all 
-			                  others.
+			          The value must be in increments of 8 characters with B2, 
+			          6 characters with B3, 4 characters from B4 to B6 (or B64 
+			          with RFC4648), 3 characters from B7 to B15, and 2 
+			          characters from B16 to B64 (without RFC4648). The maximum 
+			          value is 252 for B3, 255 from B7 to B15, and 256 for all 
+			          others.
 
         -5  --rounds          For RC5, SALSA20, and CHACHA the number of rounds should 
-			                  be a integer value (20 by default).
+			          be a integer value (20 by default).
 
         -4  --rc5-64b         For RC5 mode. It indicates that 64-bit word should be 
-			                  used.
+			          used.
 
         -3  --vmpc-ksa3       For VMPC mode. It indicates that the Key Scheduling 
-			                  Algorithm should be used.
+			          Algorithm should be used.
 
         -x  --max-buffer-size Maximum buffer size in bytes for read and write. Modes: 
-			                  All symmetric ciphers and PGP. The default value is 1024.
+			          All symmetric ciphers and PGP. The default value is 1024.
 
         -k  --key             The key characters must have a key size length divided by 
-			                  8. It must be accompanied by the initial vector in the 
-			                  terms subject to that modifier. This option is prioritized
-			                  over hash, password, salt, and iterations. Modes: All 
-			                  symmetric ciphers. This modifier supports hexadecimal byte 
-			                  notation by the escape characters \x (two-digit) and \u 
-			                  for Unicode (four-digit).
+			          8. It must be accompanied by the initial vector in the 
+			          terms subject to that modifier. This option is prioritized
+			          over hash, password, salt, and iterations. Modes: All 
+			          symmetric ciphers. This modifier supports hexadecimal byte 
+			          notation by the escape characters \x (two-digit) and \u 
+			          for Unicode (four-digit).
 
         -i  --initial-vector  It needs to be 16 characters for AES, 3DES, DES, RC2, 						
-			                  3FISH, and MARS. SALSA20 requires exactly 8 characters. 
-			                  The RIJNDAEL long must be equal to the block size divided 
-			                  by 8. With VMPC the value should be between 1 and 768 
-			                  depending on the block size. This modifier supports 
-			                  hexadecimal byte notation by the escape characters \x 
-			                  (two-digit) and \u for Unicode (four-digit).
+			          3FISH, and MARS. SALSA20 requires exactly 8 characters. 
+			          The RIJNDAEL long must be equal to the block size divided 
+			          by 8. With VMPC the value should be between 1 and 768 
+			          depending on the block size. This modifier supports 
+			          hexadecimal byte notation by the escape characters \x 
+			          (two-digit) and \u for Unicode (four-digit).
 
         -p  --password        Word, phrase or file. Modes: All symmetric ciphers and PGP 
-			                  private key or x509 certificates (*.pfx or *.pem). This 
-			                  modifier supports hexadecimal byte notation by the escape 
-			                  characters \x (two-digit) and \u for Unicode (four-digit)
-			                  with symmetric ciphers.
+			          private key or x509 certificates (*.pfx or *.pem). This 
+			          modifier supports hexadecimal byte notation by the escape 
+			          characters \x (two-digit) and \u for Unicode (four-digit)
+			          with symmetric ciphers.
 
         -s  --salt            At least 8 characters. Modes: All symmetric ciphers.
         -h  --hash            Hash algorithm. Modes: DIGEST, CHECKSUM, all symmetric  
-			                  ciphers, ECIES, DLIES, and ELGAMAL or RSA with OAEP 
-			                  (Bouncy Castle). You can use the help combined with this 
-			                  modifier to list the available hashes or for more info.
+			          ciphers, ECIES, DLIES, and ELGAMAL or RSA with OAEP 
+			          (Bouncy Castle). You can use the help combined with this 
+			          modifier to list the available hashes or for more info.
 
         -t  --iterations      Number of iterations to do. Range from 1 to 2147483647 
-			                  (1000 by default). You have to bear in mind that a 
-			                  greater number of iterations implies a slower process. 
-			                  Modes: All symmetric ciphers.
+			          (1000 by default). You have to bear in mind that a 
+			          greater number of iterations implies a slower process. 
+			          Modes: All symmetric ciphers.
 
         -c  --cipher-mode     CBC (Cipher Block Chianing) by default for all symmetric 
-			                  block ciphers. The cipher modes CFB (Cipher feedback), or 
-			                  OFB (Output feedback) are valid for all block ciphers 
-			                  except AES. Other cipher modes like ECB (Electronic Code 
-			                  Book), or CTS (Cipher Text Stealing) are only valid for 
-			                  RC2, 3DES, DES, MARS, AES, and RIJNDAEL with initial 
-			                  vector.
+			          block ciphers. The cipher modes CFB (Cipher feedback), or 
+			          OFB (Output feedback) are valid for all block ciphers 
+			          except AES. Other cipher modes like ECB (Electronic Code 
+			          Book), or CTS (Cipher Text Stealing) are only valid for 
+			          RC2, 3DES, DES, MARS, AES, and RIJNDAEL with initial 
+			          vector.
 
         -n  --padding         X923, ZEROS, ISO10126, or PKCS7 (by default). Modes: 
-			                  3FISH, AES, 3DES, DES, RC2, and RIJNDAEL. MARS only 
-			                  support PKCS7, and the others block ciphers also support 
-			                  ISO7816D4 or TBC but no ZEROS padding mode. RSA and 
-			                  ELGAMAL support PKCS1 (by default) and ISO9796D1 is 
-			                  supported only by RSA with Bouncy Castle.
+			          3FISH, AES, 3DES, DES, RC2, and RIJNDAEL. MARS only 
+			          support PKCS7, and the others block ciphers also support 
+			          ISO7816D4 or TBC but no ZEROS padding mode. RSA and 
+			          ELGAMAL support PKCS1 (by default) and ISO9796D1 is 
+			          supported only by RSA with Bouncy Castle.
 
         -r  --random-gen      Random password and salt generator. Modes: All symmetric 
-			                  ciphers.
+			          ciphers.
 
         -l  --block-size      The RIJNDAEL legal values: 128, 160, 192, 224, and 256 
-			                  (by default). The HC legal values: 128 (by default) or 
-			                  256. For VMPC the value must be between 8 and 6144 bits 
-			                  in increments of 8 bits (256 by default).
+			          (by default). The HC legal values: 128 (by default) or 
+			          256. For VMPC the value must be between 8 and 6144 bits 
+			          in increments of 8 bits (256 by default).
 
         -z  --feedback-size   For RIJNDAEL only. The feedback size determines the 
-			                  amount of data that is fed back to successive encryption 
-			                  or decryption operations. The feed back size cannot be 
-			                  greater than the block size.
+			          amount of data that is fed back to successive encryption 
+			          or decryption operations. The feed back size cannot be 
+			          greater than the block size.
 
         -y  --key-size        Key size in bits. You can use the help combined with this 
-			                  modifier for more info.
+			          modifier for more info.
 
         -g  --key-pair-gen    Key pair generator. Modes: ECIES, DLIES, ELGAMAL, 
-			                  NACCACHE, RSA, and PGP. The public and private key file 
-			                  names will be required.
+			          NACCACHE, RSA, and PGP. The public and private key file 
+			          names will be required.
 
         -b  --public-key      Public key file name. Modes: ECIES, DLIES, RSA, PGP, 
-			                  NACCACHE, and ELGAMAL.
+			          NACCACHE, and ELGAMAL.
 
         -v  --private-key     Private key file name. Modes: ECIES, DLIES, RSA, PGP, 
-			                  NACCACHE, and ELGAMAL.
+			          NACCACHE, and ELGAMAL.
 
         -9  --x509-file        X509 certificate file name. Modes: RSA, PGP, and all 
-			                  symmetric ciphers.
+			          symmetric ciphers.
 
         -0  --x509-store      X509 common name or thumbprint in the certificate store. 
-			                  Modes: RSA, PGP, and all symmetric ciphers.
+			          Modes: RSA, PGP, and all symmetric ciphers.
 
         -f  --format          For Asymmetric keys. The available formats are: [XML] 
-			                  for intrinsic RSA mode; [B64] for RSA, ELGAMAL, NACCACHE,
-			                  ECIES, and DLIES modes; [ARMORED] for PGP mode.
+			          for intrinsic RSA mode; [B64] for RSA, ELGAMAL, NACCACHE,
+			          ECIES, and DLIES modes; [ARMORED] for PGP mode.
 
         -a  --oaep            For ELGAMAL and RSA. Microsoft CryptoAPI only supports 
-			                  OAEP since Windows XP for RSA.
+			          OAEP since Windows XP for RSA.
 
         -q  --pgp-cipher      Symmetric cipher for PGP encryption: AES128, AES192, 
-			                  AES256 (by default), BLOWFISH, 2FISH, CAST5, DES, 3DES,
-			                  IDEA, CAMELLIA128, CAMELLIA192, CAMELLIA256, and SAFER.
+			          AES256 (by default), BLOWFISH, 2FISH, CAST5, DES, 3DES,
+			          IDEA, CAMELLIA128, CAMELLIA192, CAMELLIA256, and SAFER.
 
         -u  --crossbreeding   For RSA, ELGAMAL, and PGP. It allows use either keys from 
-			                  RSA to PGP and PGP to RSA or ELGAMAL to PGP and PGP to
-			                  ELGAMAL.
+			          RSA to PGP and PGP to RSA or ELGAMAL to PGP and PGP to
+			          ELGAMAL.
 
         -j  --tell-apart      Sets customized password and salt for each file in batch 
-			                  process with symmetric ciphers.
+			          process with symmetric ciphers.
 
         -o  --output          Output file name or path.
         -w  --overwrite       Overwrites the existing output file(s) without asking.
         -7  --io-options      Input and output options. You can use the help combined 
-			                  with this modifier for more info.
+			          with this modifier for more info.
 
         --export              For RSA, PGP, and ELGAMAL. Exports certificates and keys. 
-			                  You can use the help combined with this modifier for more 
-			                  info.
+			          You can use the help combined with this modifier for more 
+			          info.
 
         --encoding            Character encoding for password, salt, key, and initial 
-			                  vector with symmetric ciphers. The available encodings 
-			                  are: ASCII (by default), UNICODE-LE, UNICODE-BE, UTF-7, 
-			                  UTF-8, and UTF-32.
+			          vector with symmetric ciphers. The available encodings 
+			          are: ASCII (by default), UNICODE-LE, UNICODE-BE, UTF-7, 
+			          UTF-8, and UTF-32.
 
         --gost-box            Specifies s-box for GOST mode. The available s-boxes are: 
-			                  DEFAULT, E-TEST, E-A, E-B, E-C, E-D, D-TEST, D-A, IV, or 
-			                  empty string for nothing at all.
+			          DEFAULT, E-TEST, E-A, E-B, E-C, E-D, D-TEST, D-A, IV, or 
+			          empty string for nothing at all.
 
         --without-iv-tweak    Without tweak or initial vector if possible for symmetric 
-			                  block ciphers (with Bouncy Castle)
+			          block ciphers (with Bouncy Castle)
 
         --rsa-bouncy-castle   It uses the Bouncy Castle for RSA, PGP, and all symmetric
-			                  ciphers with key exchange (Key pair generation, 
-			                  encription, and decryption).
+			          ciphers with key exchange (Key pair generation, 
+			          encription, and decryption).
 
         --public-exponent     Long prime number for RSA or PGP mode with RSA algorithm 
-			                  and use of Bouncy Castle (65537 by default). For key pair 
-			                  generation only.
+			          and use of Bouncy Castle (65537 by default). For key pair 
+			          generation only.
 
         --certainty           Percentage of certainty when prime numbers are produced 
-			                  with Bouncy Castle. For RSA, PGP, ELGAMAL, NACCACHE, 
-			                  ECDH, and DLIES modes. For key pair generation only.
+			          with Bouncy Castle. For RSA, PGP, ELGAMAL, NACCACHE, 
+			          ECDH, and DLIES modes. For key pair generation only.
 
         --small-primes        Length of small primes for NACCACHE mode (30 by default).
         --signature           Signature for encryption and decription. A file must be 
-			                  specified and private key is required for RSA mode. You 
-			                  can specify Probabilistic Signature Schema (PSS) or 
-			                  ISO9796D2 (for RSA mode only) before the file. Modes: RSA, 
-			                  NACCACHE, and ELGAMAL.
+			          specified and private key is required for RSA mode. You 
+			          can specify Probabilistic Signature Schema (PSS) or 
+			          ISO9796D2 (for RSA mode only) before the file. Modes: RSA, 
+			          NACCACHE, and ELGAMAL.
 
         --pgp-id              Identity for PGP key pair generation.
         --pgp-sha1            Uses SHA1 with PGP for key pair generation.
         --pgp-algorithm       Public and private keys algorithm for PGP mode. The 
-			                  available algorithms are: RSA (by default), ECDH, and 
-			                  ELGAMAL.
+			          available algorithms are: RSA (by default), ECDH, and 
+			          ELGAMAL.
 
         --pgp-master          Master key pair type for PGP. The available masters are:
-			                  DSA (by default for ELGAMAL), ECDSA (by default for
-			                  ECDH), and RSA.
+			          DSA (by default for ELGAMAL), ECDSA (by default for
+			          ECDH), and RSA.
 
         --pgp-signature       Signature for PGP encryption and decription. The key pair 
-			                  or certificates will be required.
+			          or certificates will be required.
 
         --pgp-compress        It specifies a compression algorithm for encryption. The 
-			                  available algorithms are: BZIP2, ZIP (by default), ZLIB, 
-			                  and NONE.
+			          available algorithms are: BZIP2, ZIP (by default), ZLIB, 
+			          and NONE.
 
         --ies-cipher          Symmetric cipher for ECIES and DLIES modes: AES (by 
-			                  default), RIJNDAEL, SERPENT, TNEPRES, CAMELLIA, GOST, 
-			                  2FISH, 3FISH, DES, 3DES, RC2, RC5, RC6, SKIPJACK, 
-			                  BLOWFISH, CAST5, CAST6, TEA, XTEA, SEED, IDEA, NOEKEON, 
-			                  or empty string for nothing at all.
+			          default), RIJNDAEL, SERPENT, TNEPRES, CAMELLIA, GOST, 
+			          2FISH, 3FISH, DES, 3DES, RC2, RC5, RC6, SKIPJACK, 
+			          BLOWFISH, CAST5, CAST6, TEA, XTEA, SEED, IDEA, NOEKEON, 
+			          or empty string for nothing at all.
 
         --curve               Specifies a curve name for ECIES mode and PGP with ECDSA 
-			                  master key or ECDH algorithm.
+			          master key or ECDH algorithm.
 
         --curve-store         Specifies a store of curves for ECIES mode and PGP with 
-			                  ECDSA master key or ECDH algorithm. The stores curve are: 
-			                  CUSTOM, TELETRUST, NIST, ANSSI, X962, GOST, and SEC.
+			          ECDSA master key or ECDH algorithm. The stores curve are: 
+			          CUSTOM, TELETRUST, NIST, ANSSI, X962, GOST, and SEC.
 
         --show-store-curves   Shows the available curves in the specified store.
         --raise-pwd-exception Raises exception for incorrect password or salt.
         --inhibit-errors      Continue even with errors if possible in batch process.
         --inhibit-esc-chars   Does not process hexadecimal byte notation by the escape 
-			                  characters \x or \u for Unicode.
+			          characters \x or \u for Unicode.
 
         --inhibit-delimiter   Does not process semicolon as a path delimiter.
         --input-notes         Show informative notes of input data.
         --examples            Show command line examples for specified mode.
         --help                Show usage info. This modifier can be combined with others 
-			                  from behind or ahead for more info.
+			          from behind or ahead for more info.
 
 # Input notes:
 
