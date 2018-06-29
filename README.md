@@ -33,7 +33,7 @@ For files that are too large, it's recommended to increase the maximum buffer si
 # Options:
 
         -m  --mode            Algorithm mode. You can use the help combined with this 
-			          modifier to list the available modes.
+                              modifier to list the available modes.
 
         -e  --enc             Encrypt or encode operation indicator.
         -d  --dec             Decrypt or decode operation indicator.
@@ -1878,9 +1878,9 @@ List of available curves.
 
 		Key pair generation:
 
-			crypto -m ecies -g -b public.key -v private.key
-			crypto -m ecies -g -b public.key -v private.key --curve-store
-			       x962 --curve prime256v1
+			crypto -m ecies -g -b public.key -v private.key --curve prime256v1
+			crypto -m ecies -g -b public.key -v private.key --curve-store x962
+			       --curve prime256v1
 
 
 		Encryption:
@@ -1894,11 +1894,11 @@ List of available curves.
 
 		Decryption:
 
-			crypto -o file.bin -m ecies -b public.key -v private.key -e
+			crypto -o file.bin -m ecies -b public.key -v private.key -d
 			       file.ies
 
 			crypto -o file.bin -m ecies -b public.key -v private.key -h
-			       sha1 --ies-cipher rijndael -y 128 -l 128 -e file.ies
+			       sha1 --ies-cipher rijndael -y 128 -l 128 -d file.ies
 
 **DLIES**
 
@@ -1920,11 +1920,11 @@ List of available curves.
 
 		Decryption:
 
-			crypto -o file.bin -m dlies -b public.key -v private.key -e
+			crypto -o file.bin -m dlies -b public.key -v private.key -d
 			       file.ies
 
 			crypto -o file.bin -m dlies -b public.key -v private.key -h
-			       sha1 --ies-cipher rijndael -y 128 -l 128 -e file.ies
+			       sha1 --ies-cipher rijndael -y 128 -l 128 -d file.ies
 
 **RSA**
 

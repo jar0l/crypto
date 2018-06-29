@@ -9149,7 +9149,7 @@ namespace crypto
                     (
                           "\n\n {f:6}<ECIES>\n"                                                                 +
                           "\n {f:14}Key pair generation:{f:7}\n\n"                                              +
-                          "\tcrypto {t:15}-m ecies -g -b public.key -v private.key{t:0}\n"                      +
+                          "\tcrypto {t:15}-m ecies -g -b public.key -v private.key --curve prime256v{t:0}\n"    +
                           "\tcrypto {t:15}-m ecies -g -b public.key -v private.key --curve-store x962 "         +
                           "--curve prime256v1{t:0}\n"                                                           +
                           "\n {f:14}Encryption:{f:7}\n\n"                                                       +
@@ -9157,9 +9157,9 @@ namespace crypto
                           "\tcrypto {t:15}-o file.ies -m ecies -b public.key -v private.key -h sha1 "           +
                           "--ies-cipher rijndael -y 128 -l 128 -e file.bin{t:0}\n"                              +
                           "\n {f:14}Decryption:{f:7}\n\n"                                                       +
-                          "\tcrypto {t:15}-o file.bin -m ecies -b public.key -v private.key -e file.ies{t:0}\n" +
+                          "\tcrypto {t:15}-o file.bin -m ecies -b public.key -v private.key -d file.ies{t:0}\n" +
                           "\tcrypto {t:15}-o file.bin -m ecies -b public.key -v private.key -h sha1 "           +
-                          "--ies-cipher rijndael -y 128 -l 128 -e file.ies{t:0}\n"
+                          "--ies-cipher rijndael -y 128 -l 128 -d file.ies{t:0}\n"
                     );
                     break;
 
@@ -9175,9 +9175,9 @@ namespace crypto
                           "\tcrypto {t:15}-o file.ies -m dlies -b public.key -v private.key -h sha1 "            +
                           "--ies-cipher rijndael -y 128 -l 128 -e file.bin{t:0}\n"                               +
                           "\n {f:14}Decryption:{f:7}\n\n"                                                        +
-                          "\tcrypto {t:15}-o file.bin -m dlies -b public.key -v private.key -e file.ies{t:0}\n"  +
+                          "\tcrypto {t:15}-o file.bin -m dlies -b public.key -v private.key -d file.ies{t:0}\n"  +
                           "\tcrypto {t:15}-o file.bin -m dlies -b public.key -v private.key -h sha1 "            +
-                          "--ies-cipher rijndael -y 128 -l 128 -e file.ies{t:0}\n"
+                          "--ies-cipher rijndael -y 128 -l 128 -d file.ies{t:0}\n"
                     );
                     break;
 
