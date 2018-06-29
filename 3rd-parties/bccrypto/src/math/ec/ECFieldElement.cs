@@ -124,7 +124,7 @@ namespace Org.BouncyCastle.Math.EC
             return null;
         }
 
-        [Obsolete("Use ECCurve.FromBigInteger to construct field elements")]
+       // [Obsolete("Use ECCurve.FromBigInteger to construct field elements")]
         public FpFieldElement(BigInteger q, BigInteger x)
             : this(q, CalculateResidue(q), x)
         {

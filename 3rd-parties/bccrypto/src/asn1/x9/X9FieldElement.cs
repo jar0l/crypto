@@ -19,14 +19,12 @@ namespace Org.BouncyCastle.Asn1.X9
             this.f = f;
         }
 
-#pragma warning disable 618
         public X9FieldElement(
             BigInteger		p,
             Asn1OctetString	s)
             : this(new FpFieldElement(p, new BigInteger(1, s.GetOctets())))
         {
         }
-#pragma warning restore 618
 
         public X9FieldElement(
             int				m,

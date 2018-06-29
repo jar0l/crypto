@@ -33,7 +33,7 @@ namespace Org.BouncyCastle.Asn1.Sec
             this.seq = seq;
         }
 
-        [Obsolete("Use constructor which takes 'orderBitLength' instead, to guarantee correct encoding")]
+        //[Obsolete("Use constructor which takes 'orderBitLength' instead, to guarantee correct encoding")]
         public ECPrivateKeyStructure(
             BigInteger key)
         {
@@ -61,7 +61,7 @@ namespace Org.BouncyCastle.Asn1.Sec
                 new DerOctetString(bytes));
         }
 
-        [Obsolete("Use constructor which takes 'orderBitLength' instead, to guarantee correct encoding")]
+        //[Obsolete("Use constructor which takes 'orderBitLength' instead, to guarantee correct encoding")]
         public ECPrivateKeyStructure(
             BigInteger		key,
             Asn1Encodable	parameters)
@@ -69,7 +69,7 @@ namespace Org.BouncyCastle.Asn1.Sec
         {
         }
 
-        [Obsolete("Use constructor which takes 'orderBitLength' instead, to guarantee correct encoding")]
+        //[Obsolete("Use constructor which takes 'orderBitLength' instead, to guarantee correct encoding")]
         public ECPrivateKeyStructure(
             BigInteger		key,
             DerBitString	publicKey,

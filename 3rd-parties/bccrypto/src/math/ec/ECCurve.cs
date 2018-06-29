@@ -113,7 +113,7 @@ namespace Org.BouncyCastle.Math.EC
             return p;
         }
 
-        [Obsolete("Per-point compression property will be removed")]
+        //[Obsolete("Per-point compression property will be removed")]
         public virtual ECPoint ValidatePoint(BigInteger x, BigInteger y, bool withCompression)
         {
             ECPoint p = CreatePoint(x, y, withCompression);
@@ -124,15 +124,12 @@ namespace Org.BouncyCastle.Math.EC
             return p;
         }
 
-#pragma warning disable 618
         public virtual ECPoint CreatePoint(BigInteger x, BigInteger y)
         {
             return CreatePoint(x, y, false);
         }
 
-#pragma warning restore 618
-
-        [Obsolete("Per-point compression property will be removed")]
+        //[Obsolete("Per-point compression property will be removed")]
         public virtual ECPoint CreatePoint(BigInteger x, BigInteger y, bool withCompression)
         {
             return CreateRawPoint(FromBigInteger(x), FromBigInteger(y), withCompression);
@@ -196,7 +193,6 @@ namespace Org.BouncyCastle.Math.EC
             }
         }
 
-#pragma warning disable 618
         public virtual ECPoint ImportPoint(ECPoint p)
         {
             if (this == p.Curve)
@@ -213,7 +209,6 @@ namespace Org.BouncyCastle.Math.EC
 
             return ValidatePoint(p.XCoord.ToBigInteger(), p.YCoord.ToBigInteger(), p.IsCompressed);
         }
-#pragma warning restore 618
 
         /**
          * Normalization ensures that any projective coordinate is 1, and therefore that the x, y
@@ -686,7 +681,7 @@ namespace Org.BouncyCastle.Math.EC
             return x != null && x.SignValue >= 0 && x.BitLength <= FieldSize;
         }
 
-        [Obsolete("Per-point compression property will be removed")]
+        //[Obsolete("Per-point compression property will be removed")]
         public override ECPoint CreatePoint(BigInteger x, BigInteger y, bool withCompression)
         {
             ECFieldElement X = FromBigInteger(x), Y = FromBigInteger(y);

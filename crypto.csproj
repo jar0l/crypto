@@ -137,6 +137,8 @@
     <Compile Include="3rd-parties\bccrypto\src\asn1\DerUTF8String.cs" />
     <Compile Include="3rd-parties\bccrypto\src\asn1\DerVideotexString.cs" />
     <Compile Include="3rd-parties\bccrypto\src\asn1\DerVisibleString.cs" />
+    <Compile Include="3rd-parties\bccrypto\src\asn1\gm\GMNamedCurves.cs" />
+    <Compile Include="3rd-parties\bccrypto\src\asn1\gm\GMObjectIdentifiers.cs" />
     <Compile Include="3rd-parties\bccrypto\src\asn1\iana\IANAObjectIdentifiers.cs" />
     <Compile Include="3rd-parties\bccrypto\src\asn1\IAsn1ApplicationSpecificParser.cs" />
     <Compile Include="3rd-parties\bccrypto\src\asn1\IAsn1Choice.cs" />
@@ -147,6 +149,7 @@
     <Compile Include="3rd-parties\bccrypto\src\asn1\LimitedInputStream.cs" />
     <Compile Include="3rd-parties\bccrypto\src\asn1\misc\CAST5CBCParameters.cs" />
     <Compile Include="3rd-parties\bccrypto\src\asn1\misc\IDEACBCPar.cs" />
+    <Compile Include="3rd-parties\bccrypto\src\asn1\misc\MiscObjectIdentifiers.cs" />
     <Compile Include="3rd-parties\bccrypto\src\asn1\nist\NISTNamedCurves.cs" />
     <Compile Include="3rd-parties\bccrypto\src\asn1\nist\NISTObjectIdentifiers.cs" />
     <Compile Include="3rd-parties\bccrypto\src\asn1\ntt\NTTObjectIdentifiers.cs" />
@@ -166,11 +169,13 @@
     <Compile Include="3rd-parties\bccrypto\src\asn1\pkcs\RC2CBCParameter.cs" />
     <Compile Include="3rd-parties\bccrypto\src\asn1\pkcs\RSAPrivateKeyStructure.cs" />
     <Compile Include="3rd-parties\bccrypto\src\asn1\pkcs\RSASSAPSSparams.cs" />
+    <Compile Include="3rd-parties\bccrypto\src\asn1\rosstandart\RosstandartObjectIdentifiers.cs" />
     <Compile Include="3rd-parties\bccrypto\src\asn1\sec\ECPrivateKeyStructure.cs" />
     <Compile Include="3rd-parties\bccrypto\src\asn1\sec\SECNamedCurves.cs" />
     <Compile Include="3rd-parties\bccrypto\src\asn1\sec\SECObjectIdentifiers.cs" />
     <Compile Include="3rd-parties\bccrypto\src\asn1\teletrust\TeleTrusTNamedCurves.cs" />
     <Compile Include="3rd-parties\bccrypto\src\asn1\teletrust\TeleTrusTObjectIdentifiers.cs" />
+    <Compile Include="3rd-parties\bccrypto\src\asn1\ua\UAObjectIdentifiers.cs" />
     <Compile Include="3rd-parties\bccrypto\src\asn1\util\FilterStream.cs" />
     <Compile Include="3rd-parties\bccrypto\src\asn1\x509\AlgorithmIdentifier.cs" />
     <Compile Include="3rd-parties\bccrypto\src\asn1\x509\DigestInfo.cs" />
@@ -285,8 +290,14 @@
     <Compile Include="3rd-parties\bccrypto\src\crypto\CipherKeyGenerator.cs" />
     <Compile Include="3rd-parties\bccrypto\src\crypto\CryptoException.cs" />
     <Compile Include="3rd-parties\bccrypto\src\crypto\DataLengthException.cs" />
+    <Compile Include="3rd-parties\bccrypto\src\crypto\digests\Blake2bDigest.cs" />
+    <Compile Include="3rd-parties\bccrypto\src\crypto\digests\Blake2sDigest.cs" />
+    <Compile Include="3rd-parties\bccrypto\src\crypto\digests\DSTU7564Digest.cs" />
     <Compile Include="3rd-parties\bccrypto\src\crypto\digests\GeneralDigest.cs" />
     <Compile Include="3rd-parties\bccrypto\src\crypto\digests\GOST3411Digest.cs" />
+    <Compile Include="3rd-parties\bccrypto\src\crypto\digests\GOST3411_2012Digest.cs" />
+    <Compile Include="3rd-parties\bccrypto\src\crypto\digests\GOST3411_2012_256Digest.cs" />
+    <Compile Include="3rd-parties\bccrypto\src\crypto\digests\GOST3411_2012_512Digest.cs" />
     <Compile Include="3rd-parties\bccrypto\src\crypto\digests\KeccakDigest.cs" />
     <Compile Include="3rd-parties\bccrypto\src\crypto\digests\LongDigest.cs" />
     <Compile Include="3rd-parties\bccrypto\src\crypto\digests\MD2Digest.cs" />
@@ -517,9 +528,7 @@
     <Compile Include="3rd-parties\bccrypto\src\crypto\signers\ECDsaSigner.cs" />
     <Compile Include="3rd-parties\bccrypto\src\crypto\signers\ECGOST3410Signer.cs" />
     <Compile Include="3rd-parties\bccrypto\src\crypto\signers\ECNRSigner.cs" />
-    <Compile Include="3rd-parties\bccrypto\src\crypto\signers\GenericSigner.cs">
-      <SubType>Code</SubType>
-    </Compile>
+    <Compile Include="3rd-parties\bccrypto\src\crypto\signers\GenericSigner.cs" />
     <Compile Include="3rd-parties\bccrypto\src\crypto\signers\GOST3410DigestSigner.cs" />
     <Compile Include="3rd-parties\bccrypto\src\crypto\signers\GOST3410Signer.cs" />
     <Compile Include="3rd-parties\bccrypto\src\crypto\signers\IDsaKCalculator.cs" />
@@ -540,6 +549,10 @@
     <Compile Include="3rd-parties\bccrypto\src\math\ec\custom\djb\Curve25519Field.cs" />
     <Compile Include="3rd-parties\bccrypto\src\math\ec\custom\djb\Curve25519FieldElement.cs" />
     <Compile Include="3rd-parties\bccrypto\src\math\ec\custom\djb\Curve25519Point.cs" />
+    <Compile Include="3rd-parties\bccrypto\src\math\ec\custom\gm\SM2P256V1Curve.cs" />
+    <Compile Include="3rd-parties\bccrypto\src\math\ec\custom\gm\SM2P256V1Field.cs" />
+    <Compile Include="3rd-parties\bccrypto\src\math\ec\custom\gm\SM2P256V1FieldElement.cs" />
+    <Compile Include="3rd-parties\bccrypto\src\math\ec\custom\gm\SM2P256V1Point.cs" />
     <Compile Include="3rd-parties\bccrypto\src\math\ec\custom\sec\SecP128R1Curve.cs" />
     <Compile Include="3rd-parties\bccrypto\src\math\ec\custom\sec\SecP128R1Field.cs" />
     <Compile Include="3rd-parties\bccrypto\src\math\ec\custom\sec\SecP128R1FieldElement.cs" />

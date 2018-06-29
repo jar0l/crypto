@@ -97,7 +97,7 @@ namespace Org.BouncyCastle.Utilities
             return HaveSameContents(a, b);
         }
 
-        //[CLSCompliantAttribute(false)]
+ //       [CLSCompliantAttribute(false)]
         public static bool AreEqual(uint[] a, uint[] b)
         {
             if (a == b)
