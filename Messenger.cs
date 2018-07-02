@@ -458,10 +458,10 @@ namespace Jarol.Console
             {
                 if (b)
                 {
-                    if (i < n)
+                    if (i < n && fclr[i] != System.Console.ForegroundColor)
                         System.Console.ForegroundColor = fclr[i];
 
-                    if (i < m)
+                    if (i < m && bclr[i] != System.Console.BackgroundColor)
                         System.Console.BackgroundColor = bclr[i];
                 }
 
