@@ -690,8 +690,8 @@ List of available curves.
 			crypto -o file.bin -m aes -b ecdh-public.key -v
 			       ecdh-private.key -d file.aes
 
-			crypto -o file.bin -m aes -v private.pfx -d file.aes
-			crypto -o file.bin -m aes -v private.pem -d file.aes
+			crypto -o file.bin -m aes -9 private.pfx -d file.aes
+			crypto -o file.bin -m aes -9 private.pem -d file.aes
 			crypto -o file.bin -m aes -y 128 -k 1234567890123456 -i
 			       6543210987654321 -d file.aes
 
@@ -772,8 +772,8 @@ List of available curves.
 			crypto -o file.bin -m 3des -b ecdh-public.key -v
 			       ecdh-private.key -d file.3des
 
-			crypto -o file.bin -m 3des -v private.pfx -d file.3des
-			crypto -o file.bin -m 3des -v private.pem -d file.3des
+			crypto -o file.bin -m 3des -9 private.pfx -d file.3des
+			crypto -o file.bin -m 3des -9 private.pem -d file.3des
 			crypto -o file.bin -m 3des -y 128 -k 1234567890123456 -i
 			       6543210987654321 -d file.3des
 
@@ -852,8 +852,8 @@ List of available curves.
 			crypto -o file.bin -m mars -b ecdh-public.key -v
 			       ecdh-private.key -d file.mar
 
-			crypto -o file.bin -m mars -v private.pfx -d file.mar
-			crypto -o file.bin -m mars -v private.pem -d file.mar
+			crypto -o file.bin -m mars -9 private.pfx -d file.mar
+			crypto -o file.bin -m mars -9 private.pem -d file.mar
 			crypto -o file.bin -m mars -y 128 -k 1234567890123456 -i
 			       6543210987654321 -d file.mar
 
@@ -924,7 +924,7 @@ List of available curves.
 			       ecdh-private.key -d file.x20
 
 			crypto -o file.bin -m xsalsa20 -9 private.pfx -d file.x20
-			crypto -o file.bin -m xsalsa20 -v private.pem -d file.x20
+			crypto -o file.bin -m xsalsa20 -9 private.pem -d file.x20
 
 **CHACHA**
 

@@ -8356,8 +8356,8 @@ namespace crypto
                         "\tcrypto [t:15]-o file.bin -m {2} -v naccache-private.key -d file.{1}[t:0]\n"            +
                         "\tcrypto [t:15]-o file.bin -m {2} -b ecdh-public.key -v ecdh-private.key "               +
                         "-d file.{1}[t:0]\n"                                                                      +
-                        "\tcrypto [t:15]-o file.bin -m {2} -v private.pfx -d file.{1}[t:0]\n"                     +
-                        "\tcrypto [t:15]-o file.bin -m {2} -v private.pem -d file.{1}[t:0]\n"                     +
+                        "\tcrypto [t:15]-o file.bin -m {2} -9 private.pfx -d file.{1}[t:0]\n"                     +
+                        "\tcrypto [t:15]-o file.bin -m {2} -9 private.pem -d file.{1}[t:0]\n"                     +
                         "\tcrypto [t:15]-o file.bin -m {2} -y 128 -k 1234567890123456 "                           +
                         "-i 6543210987654321 -d file.{1}[t:0]\n";
 
@@ -8663,7 +8663,7 @@ namespace crypto
                           "\tcrypto {t:15}-o file.bin -m xsalsa20 -b ecdh-public.key -v ecdh-private.key "    +
                           "-d file.x20{t:0}\n"                                                                +
                           "\tcrypto {t:15}-o file.bin -m xsalsa20 -9 private.pfx -d file.x20{t:0}\n"          +
-                          "\tcrypto {t:15}-o file.bin -m xsalsa20 -v private.pem -d file.x20{t:0}\n"
+                          "\tcrypto {t:15}-o file.bin -m xsalsa20 -9 private.pem -d file.x20{t:0}\n"
                     );
                     break;
 
