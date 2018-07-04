@@ -9951,20 +9951,20 @@ namespace crypto
 
                                 break;
 
-                            case "--certainty:":
+                            case "--certainty":
                                 if (!Turn.ToByte(Program.CheckArg(args, ++i), ref _certainty) || _certainty > 100 || _certainty < 1)
                                     throw new Exception("Invalid certainty value. The number must be between 1 and 100!");
 
                                 break;
 
-                            case "--public-exponent:":
+                            case "--public-exponent":
                                 if (!Turn.ToInt64(Program.CheckArg(args, ++i), ref _public_exponent) || !BigInteger.ValueOf(_public_exponent).IsProbablePrime(100))
                                     throw new Exception("Invalid public exponent value. The number must be prime!");
 
                                 break;
 
 
-                            case "--small-primes:":
+                            case "--small-primes":
                                 if (!Turn.ToInt32(Program.CheckArg(args, ++i), ref _small_primes) || _small_primes < 30)
                                     throw new Exception("Invalid small primes value. The number can not be less than 30!");
 
