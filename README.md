@@ -2000,14 +2000,11 @@ List of available curves.
 			crypto -m pgp --pgp-algorithm ecdh -y 256 -g -b public.key -v
 			       private.key
 
-			crypto -m pgp --pgp-algorithm ecdh -y 521 -g -b public.key -v
-			       private.key --curve-store x962 --curve prime256v1
-
 			crypto -m pgp --pgp-algorithm ecdh -y 192 --pgp-master dsa -g  -b
 			       public.key -v private.key
 
-			crypto -m pgp --pgp-algorithm ecdh --curve prime256v1 --curve 
-			       sect163r2 -g -b public.key -v private.key
+			crypto -m pgp --pgp-algorithm ecdh --curve prime256v1 -g -b 
+			       public.key -v private.key
 
 
  		Encryption:

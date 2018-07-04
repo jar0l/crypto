@@ -162,19 +162,6 @@ namespace crypto
 
         //----------------------------------------------------------------------------------
 
-        public struct AbstractCurve
-        {
-            public string name;
-            public string store;
-
-            public static AbstractCurve Create (string n, string s)
-            {
-                return new AbstractCurve() { name = n, store = s, };
-            }
-        }
-
-        //----------------------------------------------------------------------------------
-
         private const string MSG_PROCESSING               = "Processing. Please wait...";
         private const string MSG_INVALID_OUTPUT           = "Invalid output file or directory!";
         private const string MSG_INVALID_KEY_SIZE         = "Invalid key size!";
@@ -580,9 +567,9 @@ namespace crypto
         private static bool           _codechanged      = false;
         private static string         _mode             = string.Empty;
         private static string         _curvestore       = string.Empty;
+        private static string         _curve            = string.Empty;
         private static int            _small_primes     = 30;
 
-        private static List<AbstractCurve>       _curve = new List<AbstractCurve>();
         private static List<AbstractCertificate> _cer   = new List<AbstractCertificate>();
         private static SymmetricKeyAlgorithmTag  _ska   = SymmetricKeyAlgorithmTag.Aes256;
         private static CompressionAlgorithmTag   _cat   = CompressionAlgorithmTag.Zip;
@@ -4165,60 +4152,39 @@ namespace crypto
         }
 
         //----------------------------------------------------------------------------------
-
-        private static AbstractCurve GetAbstractCurve ()
-        {
-            byte l = (byte)_curve.Count;
-
-            if (l < 1)
-                throw new Exception("No curves were specified!");
-
-            else if (l > 1 && (_mode != PGP || _pgp_master != ECDSA || (_pgp_algorithm == ECDH && _keysize != -1)))
-                _curve.RemoveAt(0);
-
-            AbstractCurve ac = _curve[0];
-
-            if (l > 1)
-                _curve.RemoveAt(0);
-
-            return ac;
-        }
-
-        //----------------------------------------------------------------------------------
         
         private static AsymmetricCipherKeyPair GetCurveKeyPair (string algorithm)
         {
-            AbstractCurve       ac  = Program.GetAbstractCurve();
             DerObjectIdentifier oid = null;
 
-            switch (ac.store)
+            switch (_curvestore)
             {
                 case CUSTOM:
-                    oid = CustomNamedCurves.GetOid(ac.name);
+                    oid = CustomNamedCurves.GetOid(_curve);
                     break;
 
                 case ANSSI:
-                    oid = AnssiNamedCurves.GetOid(ac.name);
+                    oid = AnssiNamedCurves.GetOid(_curve);
                     break;
 
                 case TELETRUST:
-                    oid = TeleTrusTNamedCurves.GetOid(ac.name);
+                    oid = TeleTrusTNamedCurves.GetOid(_curve);
                     break;
 
                 case NIST:
-                    oid = NistNamedCurves.GetOid(ac.name);
+                    oid = NistNamedCurves.GetOid(_curve);
                     break;
 
                 case SEC:
-                    oid = SecNamedCurves.GetOid(ac.name);
+                    oid = SecNamedCurves.GetOid(_curve);
                     break;
 
                 case X962:
-                    oid = X962NamedCurves.GetOid(ac.name);
+                    oid = X962NamedCurves.GetOid(_curve);
                     break;
 
                 case GOST:
-                    oid = ECGost3410NamedCurves.GetOid(ac.name);
+                    oid = ECGost3410NamedCurves.GetOid(_curve);
                     break;
 
                 default:
@@ -7482,9 +7448,9 @@ namespace crypto
 
             if ((ul2 & 0x10000000000000) == 0x10000000000000)
             {
-                if (_curve.Count > 0)
+                if (!string.IsNullOrEmpty(_curve))
                 {
-                    _curve.Clear();
+                    _curve = string.Empty;
                     Messenger.Print
                     (
                           Messenger.Icon.WARNING
@@ -9243,12 +9209,10 @@ namespace crypto
                           "-b public.key -v private.key{t:0}\n"                                                    +
                           "\tcrypto {t:15}-m pgp --pgp-algorithm ecdh -y 256 -g -b public.key "                    +
                           "-v private.key{t:0}\n"                                                                  +
-                          "\tcrypto {t:15}-m pgp --pgp-algorithm ecdh -y 521 -g -b public.key "                    +
-                          "-v private.key --curve-store x962 --curve prime256v1{t:0}\n"                            +
                           "\tcrypto {t:15}-m pgp --pgp-algorithm ecdh -y 192 --pgp-master dsa -g "                 +
                           "-b public.key -v private.key{t:0}\n"                                                    +
-                          "\tcrypto {t:15}-m pgp --pgp-algorithm ecdh --curve prime256v1 "                         +
-                          "--curve sect163r2 -g -b public.key -v private.key{t:0}\n"                               +
+                          "\tcrypto {t:15}-m pgp --pgp-algorithm ecdh --curve prime256v1 -g -b public.key -v "     +
+                          "private.key{t:0}\n"                                                                     +
                           "\n {f:14}Encryption:{f:7}\n\n"                                                          +
                           "\tcrypto {t:15}-o file.pgp -m pgp -b public.key -q safer -e file.bin{t:0}\n"            +
                           "\tcrypto {t:15}-o file.pgp -m pgp -b public.key --pgp-compress zlib "                   +
@@ -10059,21 +10023,11 @@ namespace crypto
                                 break;
 
                             case "--curve":
-                                saux = Program.CheckArg(args, ++i).ToLower();
+                                _curve = Program.CheckArg(args, ++i).ToLower();
 
-                                if (_curve.Count > 1)
-                                    _curve.RemoveAt(0);
+                                if (string.IsNullOrEmpty(_curvestore))
+                                    _curvestore = Program.GetCurveStoreName(_curve);
 
-                                _curve.Add
-                                (
-                                    AbstractCurve.Create
-                                    (
-                                          saux
-                                        , string.IsNullOrEmpty(_curvestore) ? 
-                                          Program.GetCurveStoreName(saux)   : 
-                                          _curvestore
-                                    )
-                                );
                                 break;
 
                             case CURVE_STORE:
@@ -10607,7 +10561,7 @@ namespace crypto
                         else if (_generator && _mode == ECDH)
                         {
                             Messenger.Print(Messenger.Icon.INFORMATION, MSG_PROCESSING);
-                            Program.ValidateParams(0x1111111111111111, 0x1111111110100111, 0x1001100);
+                            Program.ValidateParams(0x1111111111111111, 0x1101111110100111, 0x1001100);
                             Program.EcdhKeyPairGen(true);
                             Messenger.Print(Messenger.Icon.INFORMATION, MSG_DONE);
                             Environment.Exit(0);
