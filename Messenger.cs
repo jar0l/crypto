@@ -359,7 +359,15 @@ namespace Jarol.Console
                         s = i;
 
                     else if (msg[i] == Path.DirectorySeparatorChar)
-                        k = i + 1;
+                    {
+                        if (Path.DirectorySeparatorChar != '\\' && msg[i - 1] == '\\')
+                            msg = msg.Remove(i - 1, 1);
+
+                        else if (msg[i + 1] == '\\')
+                            msg = msg.Remove(i, 1);
+
+                        else k = i + 1;
+                    }
 
                     else if (msg[i] == '\t')
                     {

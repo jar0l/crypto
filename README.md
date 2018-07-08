@@ -134,10 +134,10 @@ For files that are too large, it's recommended to increase the maximum buffer si
                               names will be required.
 
         -b  --public-key      Public key file name. Modes: ECIES, DLIES, RSA, PGP, 
-                              NACCACHE, and ELGAMAL.
+                              NACCACHE, ELGAMAL, and all symmetric ciphers.
 
         -v  --private-key     Private key file name. Modes: ECIES, DLIES, RSA, PGP, 
-                              NACCACHE, and ELGAMAL.
+                              NACCACHE, ELGAMAL, and all symmetric ciphers.
 
         -9  --x509-file        X509 certificate file name. Modes: RSA, PGP, and all 
                               symmetric ciphers.
@@ -173,9 +173,9 @@ For files that are too large, it's recommended to increase the maximum buffer si
                               info.
 
         --encoding            Character encoding for password, salt, key, and initial 
-                              vector with symmetric ciphers. The available encodings 
-                              are: ASCII (by default), UNICODE-LE, UNICODE-BE, UTF-7, 
-                              UTF-8, and UTF-32.
+                              vector with symmetric ciphers and B64 mode. The available 
+                              encodings  are: ASCII (by default), UNICODE-LE, UNICODE-BE,  
+                              UTF-7, UTF-8, and UTF-32.
 
         --gost-box            Specifies s-box for GOST mode. The available s-boxes are: 
                               DEFAULT, E-TEST, E-A, E-B, E-C, E-D, D-TEST, D-A, IV, or 

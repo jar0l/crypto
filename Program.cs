@@ -6000,7 +6000,7 @@ namespace crypto
 
         //----------------------------------------------------------------------------------
 
-        private static bool SignatureExists ()
+        private static bool ValidateSignatureFile ()
         {
             if (!string.IsNullOrEmpty(_sign))
             {
@@ -6560,6 +6560,8 @@ namespace crypto
         private static void IesKeyPairGen ()
         {
             AsymmetricCipherKeyPair akp;
+
+            Program.ValidateKeyPairFiles();
 
             if (_mode == ECIES)
                 akp = Program.GetCurveKeyPair(ECDH);
@@ -7757,17 +7759,17 @@ namespace crypto
                   "length divided by 8. It must be accompanied by the initial vector in the "             +
                   "terms subject to that modifier. This option is prioritized over hash, password, salt"  + 
                   ", and iterations. Modes: All symmetric ciphers. This modifier supports "               +
-                  "hexadecimal byte notation by the escape characters \\x (two-digit) and \\u for"        +
+                  "hexadecimal byte notation by the escape characters \\\\x (two-digit) and \\\\u for"    +
                   " Unicode (four-digit).{t:0,f:15}\n"                                                    +
                   "\t-i  --initial-vector  {t:30,f:7}It Needs to be 16 characters for AES, 3DES, DES, "   +
                   "RC2, 3FISH, and MARS. SALSA20 requires exactly 8 characters. The RIJNDAEL long must "  +
                   "be equal to the block size divided by 8. With VMPC the value should be between 1 and " +
                   "768 depending on the block size. This modifier supports hexadecimal byte notation by " +
-                  "the escape characters \\x (two-digit) and \\u for Unicode (four-digit)."               + 
+                  "the escape characters \\\\x (two-digit) and \\\\u for Unicode (four-digit)."           + 
                   "{t:0,f:15}\n"                                                                          +
                   "\t-p  --password\t{t:30,f:7}Word, phrase or file. Modes: All symmetric ciphers and "   +
                   "PGP private key or x509 certificates (*.pfx or *.pem). This modifier supports "        +
-                  "hexadecimal byte notation by the escape characters \\x (two-digit) and \\u for"        +
+                  "hexadecimal byte notation by the escape characters \\\\x (two-digit) and \\\\u for"    +
                   " Unicode (four-digit) with symmetric ciphers.{t:0,f:15}\n"                             +
                   "\t-s  --salt\t    {t:30,f:7}At least 8 characters. Modes: All symmetric ciphers."      +
                   "{t:0,f:15}\n"                                                                          +
@@ -7801,9 +7803,9 @@ namespace crypto
                   "NACCACHE, RSA, and PGP. The public and private key file names will be required."       +
                   "{t:0,f:15}\n"                                                                          +
                   "\t-b  --public-key      {t:30,f:7}Public key file name. Modes: ECIES, DLIES, RSA, PGP" +
-                  ", NACCACHE, and ELGAMAL.{t:0,f:15}\n"                                                  +
+                  ", NACCACHE, ELGAMAL, and all symmetric ciphers.{t:0,f:15}\n"                           +
                   "\t-v  --private-key     {t:30,f:7}Private key file name. Modes: ECIES, DLIES, RSA, "   +
-                  "PGP, NACCACHE, and ELGAMAL.{t:0,f:15}\n"                                               +
+                  "PGP, NACCACHE, ELGAMAL, and all symmetric ciphers.{t:0,f:15}\n"                        +
                   "\t-9  --x509-file       {t:30,f:7}X509 certificate file name. Modes: RSA, PGP, and "   +
                   "all symmetric ciphers.{t:0,f:15}\n"                                                    +
                   "\t-0  --x509-store      {t:30,f:7}X509 common name or thumbprint in the certificate "  +
@@ -7827,9 +7829,9 @@ namespace crypto
                   "combined with this modifier for more info.{t:0,f:15}\n"                                +
                   "\t--export\t      {t:30,f:7}For RSA, PGP, and ELGAMAL. Exports certificates and keys." +
                   " You can use the help combined with this modifier for more info.{t:0,f:15}\n"          +
-                  "\t--encoding\t    {t:30,f:7}Character encoding for password, salt, key, and initial"   +
-                  " vector with symmetric ciphers. The available encodings are: ASCII (by default), "     +
-                  "UNICODE-LE, UNICODE-BE, UTF-7, UTF-8, and UTF-32.{t:0,f:15}\n"                         +
+                  "\t--encoding\t    {t:30,f:7}Character encoding for password, salt, key, and"           +
+                  " initial vector with symmetric ciphers and B64 mode. The available encodings are: "    +
+                  "ASCII (by default), UNICODE-LE, UNICODE-BE, UTF-7, UTF-8, and UTF-32.{t:0,f:15}\n"     +
                   "\t--gost-box\t    {t:30,f:7}Specifies s-box for GOST mode. The available s-boxes are:" +
                   " DEFAULT, E-TEST, E-A, E-B, E-C, E-D, D-TEST, D-A, IV, or empty string for nothing at" +
                   " all.{t:0,f:15}\n"                                                                     +
@@ -7876,7 +7878,7 @@ namespace crypto
                   "\t--inhibit-errors      {t:30,f:7}Continue even with errors if possible in batch "     +
                   "process.{t:0,f:15}\n"                                                                  +
                   "\t--inhibit-esc-chars   {t:30,f:7}Does not process hexadecimal byte notation by the "  +
-                  "escape characters \\x or \\u for Unicode.{t:0,f:15}\n"                                 +
+                  "escape characters \\\\x or \\\\u for Unicode.{t:0,f:15}\n"                             +
                   "\t--inhibit-delimiter   {t:30,f:7}Does not process semicolon as a path delimiter."     + 
                   "{t:0,f:15}\n"                                                                          +
                   "\t--input-notes\t {t:30,f:7}Show informative notes of input data.{t:0,f:15}\n"         +
@@ -12422,7 +12424,7 @@ namespace crypto
                                             if (_padding == CryptoPadding.OAEP && !Program.HasRsaOaep())
 	                                            throw new Exception("Microsoft CryptoAPI only supports OAEP since Windows XP!");
 
-                                            baux = Program.SignatureExists();
+                                            baux = Program.ValidateSignatureFile();
 
                                             if (_cer.Count > 0)
                                             {
@@ -12834,7 +12836,7 @@ namespace crypto
 	
 	                                    case ELGAMAL:
                                             Program.ValidateParams(0x0110101111110111, 0x1111101110100111, 0x101100);
-                                            baux = Program.SignatureExists();
+                                            baux = Program.ValidateSignatureFile();
 
                                             if (!daux)
 	                                            _padding = CryptoPadding.PKCS1;
@@ -12919,7 +12921,7 @@ namespace crypto
 
                                         case NACCACHE:
                                             Program.ValidateParams(0x1110111111110111, 0x1111111110100111, 0x101100);
-                                            baux = Program.SignatureExists();
+                                            baux = Program.ValidateSignatureFile();
 
                                             NaccacheSternKeyParameters nsk = null;
 
