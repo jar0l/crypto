@@ -2617,31 +2617,43 @@ namespace crypto
                         throw e;
                 }
             }
-
-            if (pbk == null || !(pbk is ECPublicKeyParameters))
-            {
-                if (pvk != null && pvk is ECPrivateKeyParameters)
-                    throw new Exception(MSG_INVALID_PUBLIC_KEY);
-
-                return false;
-            }
-
-            if (pvk == null || !(pvk is ECPrivateKeyParameters))
-            {
-                if (pbk != null && pbk is ECPublicKeyParameters)
-                    throw new Exception(MSG_INVALID_PRIVATE_KEY);
-
-                return false;
-            }
-            
-            ECDHCBasicAgreement eca = new ECDHCBasicAgreement();
+            IBasicAgreement     bag = null;
+            IDerivationFunction dfn = null;
             byte[]              tmp;
 
-            eca.Init(pvk);
-            tmp = eca.CalculateAgreement(pbk).ToByteArray();
+            if (pbk == null || pvk == null)
+                return false;
 
-            ECDHKekGenerator eck = new ECDHKekGenerator(Program.GetBouncyCastleDigest());
-            eck.Init(new DHKdfParameters(NistObjectIdentifiers.Aes, tmp.Length, tmp));
+            if (pbk is ECPublicKeyParameters && !(pvk is ECPrivateKeyParameters))
+                throw new Exception(MSG_INVALID_PUBLIC_KEY);
+
+            if (pvk is ECPrivateKeyParameters)
+            {
+                if (!(pbk is ECPublicKeyParameters))
+                    throw new Exception(MSG_INVALID_PRIVATE_KEY);
+
+                bag = new ECDHCBasicAgreement();
+                dfn = new ECDHKekGenerator(Program.GetBouncyCastleDigest());
+            }
+
+            if (pbk is DHPublicKeyParameters && !(pvk is DHPrivateKeyParameters))
+                throw new Exception(MSG_INVALID_PUBLIC_KEY);
+
+            if (pvk is DHPrivateKeyParameters)
+            {
+                if (!(pbk is DHPublicKeyParameters))
+                    throw new Exception(MSG_INVALID_PRIVATE_KEY);
+
+                bag = new DHBasicAgreement();
+                dfn = new DHKekGenerator(Program.GetBouncyCastleDigest());
+            }
+
+            if (bag == null)
+                return false;
+
+            bag.Init(pvk);
+            tmp = bag.CalculateAgreement(pbk).ToByteArray();
+            dfn.Init(new DHKdfParameters(NistObjectIdentifiers.Aes, tmp.Length, tmp));
 
             short k = _keysize;
             short b = _blocksize;
@@ -2649,13 +2661,13 @@ namespace crypto
             Program.AssertSymmetricSizes(ref k, ref b, hightdiv);
 
             tmp = new byte[k];
-            eck.GenerateBytes(tmp, 0, tmp.Length);
+            dfn.GenerateBytes(tmp, 0, tmp.Length);
             _sk.key = tmp;
 
             if (b >= 4)
             {
                 tmp = new byte[b];
-                eck.GenerateBytes(tmp, 0, tmp.Length);
+                dfn.GenerateBytes(tmp, 0, tmp.Length);
                 _sk.iv = tmp;
             }
 
@@ -4250,7 +4262,7 @@ namespace crypto
 
         //----------------------------------------------------------------------------------
 
-        private static void EcdhKeyPairGen (AsymmetricCipherKeyPair akp)
+        private static void ECKeyPairGen (AsymmetricCipherKeyPair akp)
         {
             if (!(akp.Public is ECPublicKeyParameters))
                 throw new Exception(MSG_INVALID_PUBLIC_KEY);
@@ -4528,7 +4540,7 @@ namespace crypto
 
         //----------------------------------------------------------------------------------
 
-        private static void PgpEcdhKeyPairGen (bool armored, AsymmetricCipherKeyPair guest = null)
+        private static void PgpECKeyPairGen (bool armored, AsymmetricCipherKeyPair guest = null)
         {
             if (guest == null)
                 guest = Program.EcdhKeyPairGen();
@@ -4624,7 +4636,6 @@ namespace crypto
                                     Program.DefinePassword(true);
                                     PgpPrivateKey pvk = psk.ExtractPrivateKey(_password.ToCharArray());
 
-                                    //_hasprivatekey = true;
                                     return pvk;
                                 }
 
@@ -6557,57 +6568,30 @@ namespace crypto
 
         //----------------------------------------------------------------------------------
 
-        private static void IesKeyPairGen ()
-        {
-            AsymmetricCipherKeyPair akp;
-
-            Program.ValidateKeyPairFiles();
-
-            if (_mode == ECIES)
-                akp = Program.GetCurveKeyPair(ECDH);
-            
-            else
-            {
-                if (_keysize == -1)
-                    _keysize = 256;
-
-                Program.ValidateKeyPairSize();
-
-                DHKeyPairGenerator    kpg = new DHKeyPairGenerator();
-                DHParametersGenerator dpg = new DHParametersGenerator();
-
-                dpg.Init(_keysize, Program.GetPrimeCertainty(_keysize), new SecureRandom());
-                
-                DHKeyGenerationParameters kgp = new DHKeyGenerationParameters
-                (
-                      new SecureRandom()
-                    , dpg.GenerateParameters()
-                );
-
-                kpg.Init(kgp);
-                akp = kpg.GenerateKeyPair(); 
-            }
-
-            Program.AsymmetricKeyPairGen(akp);
-        }
-
-        //----------------------------------------------------------------------------------
-
         private static void IesImportKeys (ref ICipherParameters pbk, ref ICipherParameters pvk)
         {
-            pbk = Program.ImportAsymmetricKey
-            (
-                  _public_key
-                , true
-                , MSG_INVALID_PUBLIC_KEY
-            );
+            if (_crossbreeding)
+            {
+                pbk = Program.PgpPublicKeyToEcdh(Program.GetPgpPublicKey());
+                pvk = Program.PgpPrivateKeyToEcdh(Program.GetPgpPrivateKey());
+            }
 
-            pvk = Program.ImportAsymmetricKey
-            (
-                  _private_key
-                , false
-                , MSG_INVALID_PRIVATE_KEY
-            );
+            else
+            {
+                pbk = Program.ImportAsymmetricKey
+                (
+                      _public_key
+                    , true
+                    , MSG_INVALID_PUBLIC_KEY
+                );
+
+                pvk = Program.ImportAsymmetricKey
+                (
+                      _private_key
+                    , false
+                    , MSG_INVALID_PRIVATE_KEY
+                );
+            }
         }
 
 
@@ -7818,8 +7802,9 @@ namespace crypto
                   "\t-q  --pgp-cipher      {t:30,f:7}Symmetric cipher for PGP encryption: AES128, AES192" +
                   ", AES256 (by default), BLOWFISH, 2FISH, CAST5, DES, 3DES, IDEA, CAMELLIA128, "         + 
                   "CAMELLIA192, CAMELLIA256, and SAFER.{t:0,f:15}\n"                                      +
-                  "\t-u  --crossbreeding   {t:30,f:7}For RSA, ELGAMAL, and PGP. It allows use either "    +
-                  "keys from RSA to PGP and PGP to RSA or ELGAMAL to PGP and PGP to ELGAMAL.{t:0,f:15}\n" +
+                  "\t-u  --crossbreeding   {t:30,f:7}For RSA, ELGAMAL, ECDH and PGP. It allows to "       +
+                  "exchange the keys from RSA to PGP and PGP to RSA, or ELGAMAL to PGP and PGP to "       +
+                  "ELGAMAL, or ECDH to PGP and PGP to ECDH.{t:0,f:15}\n"                                  +
                   "\t-j  --tell-apart      {t:30,f:7}It sets customized password and salt for each file " +
                   "in batch process with symmetric ciphers.{t:0,f:15}\n"                                  +
                   "\t-o  --output\t  {t:30,f:7}Output file name or path.{t:0,f:15}\n"                     +
@@ -7827,8 +7812,8 @@ namespace crypto
                   "asking.{t:0,f:15}\n"                                                                   +
                   "\t-7  --io-options      {t:30,f:7}Input and output options. You can use the help "     +
                   "combined with this modifier for more info.{t:0,f:15}\n"                                +
-                  "\t--export\t      {t:30,f:7}For RSA, PGP, and ELGAMAL. Exports certificates and keys." +
-                  " You can use the help combined with this modifier for more info.{t:0,f:15}\n"          +
+                  "\t--export\t      {t:30,f:7}For RSA, PGP, ELGAMAL, and ECDH. Exports certificates and" +
+                  " keys. You can use the help combined with this modifier for more info.{t:0,f:15}\n"    +
                   "\t--encoding\t    {t:30,f:7}Character encoding for password, salt, key, and"           +
                   " initial vector with symmetric ciphers and B64 mode. The available encodings are: "    +
                   "ASCII (by default), UNICODE-LE, UNICODE-BE, UTF-7, UTF-8, and UTF-32.{t:0,f:15}\n"     +
@@ -9118,7 +9103,7 @@ namespace crypto
                     (
                           "\n\n {f:6}<ECIES>\n"                                                                 +
                           "\n {f:14}Key pair generation:{f:7}\n\n"                                              +
-                          "\tcrypto {t:15}-m ecies -g -b public.key -v private.key --curve prime256v{t:0}\n"    +
+                          "\tcrypto {t:15}-m ecies -g -b public.key -v private.key --curve prime256v1{t:0}\n"   +
                           "\tcrypto {t:15}-m ecies -g -b public.key -v private.key --curve-store x962 "         +
                           "--curve prime256v1{t:0}\n"                                                           +
                           "\n {f:14}Encryption:{f:7}\n\n"                                                       +
@@ -10322,7 +10307,7 @@ namespace crypto
                             }
 
                             else if (_pgp_algorithm == ECDH)
-                                Program.PgpEcdhKeyPairGen(_format == CryptoFormat.ARMORED);
+                                Program.PgpECKeyPairGen(_format == CryptoFormat.ARMORED);
 
                             else throw new Exception(MSG_INVALID_PGP_ALGORITHM);
 
@@ -10440,7 +10425,7 @@ namespace crypto
                                         break;
 
                                     case ECDH:
-                                        Program.EcdhKeyPairGen
+                                        Program.ECKeyPairGen
                                         (
                                             new AsymmetricCipherKeyPair
                                             (
@@ -10543,7 +10528,9 @@ namespace crypto
                             if (_mode == DLIES)
                             {
                                 Program.ValidateParams(0, 0x10000000000000);
-                                //Program.ValidateKeySize(768, 768, 768);
+
+                                if (_keysize == -1)
+                                    _keysize = 256;
                             }
 
                             Program.ValidateParams(0x1111111111111111, 0x1101111110100111, 0x1100);
@@ -10556,7 +10543,7 @@ namespace crypto
                                 , true
                             );
 
-                            Program.IesKeyPairGen();
+                            Program.EcdhKeyPairGen(true);
                             Messenger.Print(Messenger.Icon.INFORMATION, MSG_DONE);
                             Environment.Exit(0);
                         }
@@ -10596,10 +10583,11 @@ namespace crypto
                                 , true
                                 , MSG_INVALID_PUBLIC_KEY
                             );
+
                             _private_key = _export_pvk;
                             _public_key = _export_pbk;
 
-                            Program.PgpEcdhKeyPairGen
+                            Program.PgpECKeyPairGen
                             (
                                   _format == CryptoFormat.ARMORED
                                 , new AsymmetricCipherKeyPair(apbk, apvk)
@@ -12275,8 +12263,12 @@ namespace crypto
                                             goto case ECIES;
 
                                         case ECIES:
-                                            if (!daux)
-                                                Program.ValidateParams(0x0000000011111111, 0x1100111110100100, 0x1111100);
+                                            if (!daux) Program.ValidateParams
+                                            (
+                                                  0x0000000011111111
+                                                , 0x1100101110100100
+                                                , 0x1111100
+                                            );
 
                                             switch (_ies_cipher)
                                             {
@@ -12397,7 +12389,19 @@ namespace crypto
 
                                             if (_generator)
                                             {
-                                                Program.IesKeyPairGen();
+                                                if (_crossbreeding)
+                                                {
+                                                    _crossbreeding = false;
+                                                    Messenger.Print
+                                                    (
+                                                          Messenger.Icon.WARNING
+                                                        , MSG_CROSS_INCOMPATIBLE
+                                                        , false
+                                                        , true
+                                                    );
+                                                }
+
+                                                Program.EcdhKeyPairGen(true);
                                                 _generator = false;
                                             }
 
@@ -12617,7 +12621,7 @@ namespace crypto
                                                                 break;
 
                                                             case ECDH:
-                                                                Program.PgpEcdhKeyPairGen(baux);
+                                                                Program.PgpECKeyPairGen(baux);
                                                                 break;
 
                                                             default:
