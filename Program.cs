@@ -4237,9 +4237,10 @@ namespace crypto
                         throw new Exception(MSG_INVALID_KEY_SIZE);
                 }
 
-                IAsymmetricCipherKeyPairGenerator akpg = GeneratorUtilities.GetKeyPairGenerator(ECDH);
                 DHParametersGenerator             dhpg = new DHParametersGenerator();
-
+                IAsymmetricCipherKeyPairGenerator akpg = _mode == DLIES ? new DHKeyPairGenerator() : 
+                                                         GeneratorUtilities.GetKeyPairGenerator(ECDH);
+                
                 dhpg.Init(_keysize, Program.GetPrimeCertainty(_keysize, 192, 521, true), new SecureRandom());
                 DHKeyGenerationParameters kgp = new DHKeyGenerationParameters
                 (
