@@ -1,13 +1,13 @@
 # crypto
-Multiplatform Console Crypto Tool
+Cross-platform Crypto Tool
 
 **Introduction:**
 
-Crypto is a command line utility that allows you to encode, decode, encrypt, decrypt and digest with files of any size. It has more than 64 bases, 35 cipherers and 126 digestive algorithms.
+Crypto is a command-line utility that allows you to encode, decode, encrypt, decrypt and digest with files of any size. It has more than 64 bases, 35 cipherers and 126 digestive algorithms.
 	
 **System requirements:** 
 
-This application is an executable console for x86 processors, and has been developed in C Sharp under .Net 2.0. This means that it's necessary to have installed the framework libraries in your system. In this sense, the application can be executed on other platforms that aren't Windows by means of [Mono](http://www.mono-project.com/).
+This application is a console executable for x86 processors, and has been developed in C Sharp under .Net 2.0 Framework. This means that it's necessary to have installed the [.Net](https://www.microsoft.com/net) libraries in your system. In this sense, the application can also be executed by means of [Mono](http://www.mono-project.com/).
 
 For the rest, just copy the executable file to any folder you want, and run it with the desired command line option, according to your needs.
 	
