@@ -3,7 +3,7 @@ Cross-platform Crypto Tool
 
 **Introduction:**
 
-Crypto is a command-line utility that allows you to encode, decode, encrypt, decrypt and digest with files of any size. It has more than 64 bases, 35 cipherers and 126 digestive algorithms.
+Crypto is a command-line utility that allows you to encode, decode, encrypt, decrypt and digest with files of any size. It has more than 64 bases, 35 ciphers and 126 digestive algorithms.
 	
 **System requirements:** 
 
@@ -307,12 +307,12 @@ List of available modes.
 **Asymmetric Ciphers:**
 
       	RSA (Rivest, Shamir and Adleman)
-      	PGP (Pretty Good Privacy, Open, RFC 4880)
       	ELGAMAL
       	NACCACHE
 
-**Hybrids Ciphers:**
+**Hybrid Ciphers:**
 
+      	PGP (Pretty Good Privacy, Open, RFC 4880)
       	ECIES (Elliptic Curve Integrated Encryption Scheme)
       	DLIES (Discrete Logarithm Integrated Encryption Scheme)
 

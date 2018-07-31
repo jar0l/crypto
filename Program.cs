@@ -7929,10 +7929,10 @@ namespace crypto
                           "\n\t- HC (Hongjun Cipher)\n\n"                                       +
                           "\r Asymmetric Ciphers:\r\n"                                          +
                           "\n\t- RSA (Rivest, Shamir and Adleman)"                              +
-                          "\n\t- PGP (Pretty Good Privacy, Open, RFC 4880)"                     +
                           "\n\t- ELGAMAL"                                                       +
                           "\n\t- NACCACHE\n\n"                                                  +
                           "\r Hybrids:\r\n"                                                     +
+                          "\n\t- PGP (Pretty Good Privacy, Open, RFC 4880)"                     +
                           "\n\t- ECIES (Elliptic Curve Integrated Encryption Scheme)"           +
                           "\n\t- DLIES (Discrete Logarithm Integrated Encryption Scheme)\n\n"   +
                           "\r Others:\r\n"                                                      +
