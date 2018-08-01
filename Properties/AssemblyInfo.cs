@@ -1,4 +1,6 @@
-﻿using System.Reflection;
+﻿#if !NETCOREAPP2_0
+
+using System.Reflection;
 using System.Runtime.CompilerServices;
 using System.Runtime.InteropServices;
 using System.Resources;
@@ -36,3 +38,5 @@ using System.Resources;
 [assembly: AssemblyVersion("1.1.6.5")]
 [assembly: AssemblyFileVersion("1.1.6.5")]
 [assembly: NeutralResourcesLanguageAttribute("en-US")]
+
+#endif

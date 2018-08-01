@@ -1,0 +1,41 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <OutputType>Exe</OutputType>
+    <TargetFramework>netcoreapp2.0</TargetFramework>
+    <ApplicationIcon>Main.ico</ApplicationIcon>
+    <Version>1.1.6.5</Version>
+    <Authors>José A. Rojo L.</Authors>
+    <Company />
+    <Description>console crypto tool</Description>
+    <Copyright>2018, José A. Rojo L.</Copyright>
+    <NeutralLanguage>en-US</NeutralLanguage>
+    <PackageProjectUrl>https://github.com/jar0l/crypto</PackageProjectUrl>
+    <PackageLicenseUrl>https://github.com/jar0l/crypto/blob/master/LICENSE</PackageLicenseUrl>
+    <RepositoryUrl>https://github.com/jar0l/crypto</RepositoryUrl>
+    <PackageReleaseNotes>.Net Core 2.0</PackageReleaseNotes>
+    <AssemblyName>crypto</AssemblyName>
+    <RootNamespace>crypto</RootNamespace>
+  </PropertyGroup>
+
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
+    <DefineConstants>TRACE;DEBUG;INCLUDE_IDEA;NETCOREAPP2_0</DefineConstants>
+    <NoWarn>1701;1702;1705;CS0618</NoWarn>
+  </PropertyGroup>
+
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|AnyCPU'">
+    <DefineConstants>TRACE;RELEASE;INCLUDE_IDEA;NETCOREAPP2_0</DefineConstants>
+    <NoWarn>1701;1702;1705;CS0618</NoWarn>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <None Remove="3rd-parties\bccrypto\license.txt" />
+    <None Remove="3rd-parties\cryptolib\readme.txt" />
+    <None Remove="3rd-parties\hashlib\license.txt" />
+    <None Remove="3rd-parties\hashlib\readme.txt" />
+    <None Remove="app.config" />
+    <None Remove="ClassDiagram1.cd" />
+    <None Remove="README.md" />
+  </ItemGroup>
+
+</Project>

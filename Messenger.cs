@@ -25,9 +25,12 @@ SOFTWARE.
 using System;
 using System.Text;
 using System.Text.RegularExpressions;
-using System.Media;
 using System.IO;
 using System.Collections.Generic;
+
+#if !NETCOREAPP2_0
+    using System.Media;
+#endif
 
 //---------------------------------------------------------------------------------
 
@@ -571,8 +574,10 @@ namespace Jarol.Console
             ConsoleKeyInfo ki = new ConsoleKeyInfo();
             ConsoleColor[] cc;
 
-            if (bss && Path.DirectorySeparatorChar == '\\')
-                SystemSounds.Beep.Play();
+            #if !NETCOREAPP2_0
+                if (bss && Path.DirectorySeparatorChar == '\\')
+                    SystemSounds.Beep.Play();
+            #endif
 
             switch (icn)
             {

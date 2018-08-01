@@ -1490,7 +1490,7 @@ namespace crypto
                     return new HashAlgorithmWrapper(new RIPEMD128());
 
                 case HASH_RIPEMD160:
-                    return RIPEMD160.Create();
+                    return new HashAlgorithmWrapper(new HashLib.Crypto.RIPEMD160());
 
                 case HASH_RIPEMD256:
                     return new HashAlgorithmWrapper(new RIPEMD256());
@@ -1986,7 +1986,7 @@ namespace crypto
                     break;
 
                 case HASH_RIPEMD160:
-                    db = new PBKDF2<HMACRIPEMD160>(bp, bs, _iterations);
+                    db = new PBKDF2<HMACGEN<HashLib.Crypto.RIPEMD160>>(bp, bs, _iterations);
                     break;
 
                 case HASH_RIPEMD256:

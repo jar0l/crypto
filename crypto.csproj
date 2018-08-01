@@ -851,6 +851,7 @@
     <Compile Include="3rd-parties\hashlib\src\Crypto\RadioGatun64.cs" />
     <Compile Include="3rd-parties\hashlib\src\Crypto\RIPEMD.cs" />
     <Compile Include="3rd-parties\hashlib\src\Crypto\RIPEMD128.cs" />
+    <Compile Include="3rd-parties\hashlib\src\Crypto\RIPEMD160.cs" />
     <Compile Include="3rd-parties\hashlib\src\Crypto\RIPEMD256.cs" />
     <Compile Include="3rd-parties\hashlib\src\Crypto\RipeMD320.cs" />
     <Compile Include="3rd-parties\hashlib\src\Crypto\SHA0.cs" />
