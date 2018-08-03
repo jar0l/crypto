@@ -16,6 +16,8 @@
     <PackageReleaseNotes>.Net Core 2.0</PackageReleaseNotes>
     <AssemblyName>crypto</AssemblyName>
     <RootNamespace>crypto</RootNamespace>
+    <AssemblyVersion>1.1.6.6</AssemblyVersion>
+    <FileVersion>1.1.6.6</FileVersion>
   </PropertyGroup>
 
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
@@ -35,6 +37,8 @@
     <None Remove="3rd-parties\hashlib\readme.txt" />
     <None Remove="app.config" />
     <None Remove="ClassDiagram1.cd" />
+    <None Remove="LICENSE" />
+    <None Remove="Main.ico" />
     <None Remove="README.md" />
   </ItemGroup>
 

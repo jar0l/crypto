@@ -7716,6 +7716,8 @@ namespace crypto
             Messenger.Print
             (
                   "\n {f:14}Usage:\n\n\t{f:7}crypto [options...] input-file-name\n"                       +
+                  "\t{f:7}mono crypto.exe [options...] input-file-name\n"                                 +
+                  "\t{f:7}dotnet crypto.dll [options...] input-file-name\n"                               +
                   "\n {f:14}Options:\n\n"                                                                 +
                   "{f:15}\t-m  --mode\t    {t:30,f:7}Algorithm mode. You can use the help combined with " +
                   "this modifier to list the available modes.{ t:0,f:15}\n"                               +
@@ -7809,7 +7811,7 @@ namespace crypto
                   "\t-j  --tell-apart      {t:30,f:7}It sets customized password and salt for each file " +
                   "in batch process with symmetric ciphers.{t:0,f:15}\n"                                  +
                   "\t-o  --output\t  {t:30,f:7}Output file name or path.{t:0,f:15}\n"                     +
-                  "\t-w  --overwrite       {t:30,f:7}Overwrites the existing output file(s) without "     +
+                  "\t-w  --overwrite       {t:30,f:7}It overwrites the existing output file(s) without "  +
                   "asking.{t:0,f:15}\n"                                                                   +
                   "\t-7  --io-options      {t:30,f:7}Input and output options. You can use the help "     +
                   "combined with this modifier for more info.{t:0,f:15}\n"                                +
@@ -7839,9 +7841,9 @@ namespace crypto
                   "Signature Schema (PSS) or ISO9796D2 (for RSA mode only) before the file. Modes: RSA, " + 
                   "NACCACHE, and ELGAMAL.{t:0,f:15}\n"                                                    +
                   "\t--pgp-id\t      {t:30,f:7}Identity for PGP key pair generation.{t:0,f:15}\n"         +
-                  "\t--pgp-sha1\t    {t:30,f:7}Uses SHA1 with PGP for key pair generation.{t:0,f:15}\n"   +
-                  "\t--pgp-algorithm       {t:30,f:7}Public and private keys algorithm for PGP mode. The" +
-                  " available algorithms are: RSA (by default), ECDH, and ELGAMAL.{t:0,f:15}\n"           +
+                  "\t--pgp-sha1\t    {t:30,f:7}It uses SHA1 with PGP for key pair generation.{t:0,f:15}"  +
+                  "\n\t--pgp-algorithm       {t:30,f:7}Public and private keys algorithm for PGP mode. "  +
+                  "The available algorithms are: RSA (by default), ECDH, and ELGAMAL.{t:0,f:15}\n"        +
                   "\t--pgp-master\t  {t:30,f:7}Master key pair type for PGP. The available masters are: " +
                   "DSA (by default for ELGAMAL), ECDSA (by default for ECDH), and RSA.{t:0,f:15}\n"       +
                   "\t--pgp-signature       {t:30,f:7}Signature for PGP encryption and decription. The "   +

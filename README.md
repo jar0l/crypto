@@ -29,6 +29,8 @@ For files that are too large, it's recommended to increase the maximum buffer si
 # Usage:
 
         crypto [options...] input-file-name
+        mono crypto.exe [options...] input-file-name
+        dotnet crypto.dll [options...] input-file-name	
 
 # Options:
 
@@ -160,7 +162,7 @@ For files that are too large, it's recommended to increase the maximum buffer si
                               RSA to PGP and PGP to RSA or ELGAMAL to PGP and PGP to
                               ELGAMAL.
 
-        -j  --tell-apart      Sets customized password and salt for each file in batch 
+        -j  --tell-apart      It sets customized password and salt for each file in batch 
                               process with symmetric ciphers.
 
         -o  --output          Output file name or path.
@@ -182,7 +184,7 @@ For files that are too large, it's recommended to increase the maximum buffer si
                               empty string for nothing at all.
 
         --without-iv-tweak    Without tweak or initial vector if possible for symmetric 
-                              block ciphers (with Bouncy Castle)
+                              block ciphers (with Bouncy Castle).
 
         --rsa-bouncy-castle   It uses the Bouncy Castle for RSA, PGP, and all symmetric
                               ciphers with key exchange (Key pair generation, 
@@ -204,7 +206,7 @@ For files that are too large, it's recommended to increase the maximum buffer si
                               NACCACHE, and ELGAMAL.
 
         --pgp-id              Identity for PGP key pair generation.
-        --pgp-sha1            Uses SHA1 with PGP for key pair generation.
+        --pgp-sha1            It uses SHA1 with PGP for key pair generation.
         --pgp-algorithm       Public and private keys algorithm for PGP mode. The 
                               available algorithms are: RSA (by default), ECDH, and 
                               ELGAMAL.
@@ -226,15 +228,15 @@ For files that are too large, it's recommended to increase the maximum buffer si
                               BLOWFISH, CAST5, CAST6, TEA, XTEA, SEED, IDEA, NOEKEON, 
                               or empty string for nothing at all.
 
-        --curve               Specifies a curve name for ECIES mode and PGP with ECDSA 
-                              master key or ECDH algorithm.
+        --curve               It specifies a curve name for ECIES mode and PGP with  
+                              ECDSA master key or ECDH algorithm.
 
-        --curve-store         Specifies a store of curves for ECIES mode and PGP with 
+        --curve-store         It specifies a store of curves for ECIES mode and PGP with 
                               ECDSA master key or ECDH algorithm. The stores curve are: 
                               CUSTOM, TELETRUST, NIST, ANSSI, X962, GOST, and SEC.
 
-        --show-store-curves   Shows the available curves in the specified store.
-        --raise-pwd-exception Raises exception for incorrect password or salt.
+        --show-store-curves   Show the available curves in the specified store.
+        --raise-pwd-exception Raise exception for incorrect password or salt.
         --inhibit-errors      Continue even with errors if possible in batch process.
         --inhibit-esc-chars   Does not process hexadecimal byte notation by the escape 
                               characters \x or \u for Unicode.
@@ -503,17 +505,19 @@ List of available curves.
 
 **Custom:**
 
-      	curve25519  secp128r1   secp160k1   secp160r1   secp160r2   secp192k1
+       	curve25519   secp128r1    secp160k1    secp160r1    secp160r2
 
-       	secp192r1   secp224k1   secp224r1   secp256k1   secp256r1   secp384r1
+       	secp192k1    secp192r1    secp224k1    secp224r1    secp256k1
 
-       	secp521r1   sect113r1   sect113r2   sect131r1   sect131r2   sect163k1
+       	secp256r1    secp384r1    secp521r1    sect113r1    sect113r2
 
-       	sect163r1   sect163r2   sect193r1   sect193r2   sect233k1   sect233r1
+       	sect131r1    sect131r2    sect163k1    sect163r1    sect163r2
 
-       	sect239k1   sect283k1   sect283r1   sect409k1   sect409r1   sect571k1
+       	sect193r1    sect193r2    sect233k1    sect233r1    sect239k1
 
-       	sect571r1
+       	sect283k1    sect283r1    sect409k1    sect409r1    sect571k1
+
+       	sect571r1    sm2p256v1
 
 
 **Teletrust:**
@@ -553,12 +557,15 @@ List of available curves.
 
 
 **Gost:**
+		GostR3410-2001-CryptoPro-XchA     Tc26-Gost-3410-12-512-paramSetA
 
-		GostR3410-2001-CryptoPro-B     GostR3410-2001-CryptoPro-A
+		Tc26-Gost-3410-12-256-paramSetA   Tc26-Gost-3410-12-512-paramSetC
 
-		GostR3410-2001-CryptoPro-XchA  GostR3410-2001-CryptoPro-C
+		GostR3410-2001-CryptoPro-A        Tc26-Gost-3410-12-512-paramSetB
 
-		GostR3410-2001-CryptoPro-XchB
+		GostR3410-2001-CryptoPro-XchB     GostR3410-2001-CryptoPro-B
+
+		GostR3410-2001-CryptoPro-C
 
 **Sec:**
 
