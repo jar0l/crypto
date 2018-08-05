@@ -5263,12 +5263,12 @@ namespace crypto
                     string s = "Pgp signature verification ";
 
                     if (ps == null || sl == null || sl.Count < 1 || !ps.Verify((PgpSignature)sl[0]))
-                        throw new Exception(s + "failed!");
+                        throw new Exception(s + "unsuccessful!");
 
          		    else Messenger.Print
                     (
                           Messenger.Icon.INFORMATION
-                        , s + "successed!"
+                        , s + "successful!"
                         , false
                         , true
                     );
@@ -5999,12 +5999,12 @@ namespace crypto
             string s = "Signature verification ";
 
             if (!signer.VerifySignature(File.ReadAllBytes(_sign)))
-                throw new Exception(s + "failed!");
+                throw new Exception(s + "unsuccessful!");
 
             else Messenger.Print
             (
                   Messenger.Icon.INFORMATION
-                , s + "successed!"
+                , s + "successful!"
                 , false
                 , true
             );
