@@ -403,9 +403,12 @@ namespace Jarol.Console
                         i   = --k;
                         k   = s = 0;
                     }
-
-                    else msg = msg.Insert(i--, "\n");
-
+                    
+                    else
+                    {
+                        msg = msg.Insert(--i, "\n");
+                        --i;
+                    }
                 }
             }
 
