@@ -4,7 +4,7 @@
     <OutputType>Exe</OutputType>
     <TargetFramework>netcoreapp2.0</TargetFramework>
     <ApplicationIcon>Main.ico</ApplicationIcon>
-    <Version>1.1.6.5</Version>
+    <Version>1.1.6.10</Version>
     <Authors>José A. Rojo L.</Authors>
     <Company />
     <Description>console crypto tool</Description>
@@ -16,8 +16,8 @@
     <PackageReleaseNotes>.Net Core 2.0</PackageReleaseNotes>
     <AssemblyName>crypto</AssemblyName>
     <RootNamespace>crypto</RootNamespace>
-    <AssemblyVersion>1.1.6.8</AssemblyVersion>
-    <FileVersion>1.1.6.8</FileVersion>
+    <AssemblyVersion>1.1.6.10</AssemblyVersion>
+    <FileVersion>1.1.6.10</FileVersion>
   </PropertyGroup>
 
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">

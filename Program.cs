@@ -10085,10 +10085,28 @@ namespace crypto
                                 break;
 
                             default:
+                                saux = string.Empty;
+
+                                if (!string.IsNullOrEmpty(ifn))
+                                    saux = ifn;
+
                                 ifn = Program.CheckArg(args, i, false);
 
                                 if (ifn.Equals(BATCH, StringComparison.InvariantCultureIgnoreCase))
                                     ifn += Program.CheckArg(args, ++i, false);
+
+                                else if (!string.IsNullOrEmpty(saux))
+                                {
+                                    Program.ShowBanner();
+                                    Messenger.Print
+                                    (
+                                          Messenger.Icon.WARNING
+                                        , "Exchange in the input file:\n\nOld < " + 
+                                          saux + "\nNew > " + ifn
+                                        , false
+                                        , true
+                                    );
+                                }
 
                                 break;
                         }
@@ -10588,7 +10606,7 @@ namespace crypto
                             );
 
                             _private_key = _export_pvk;
-                            _public_key = _export_pbk;
+                            _public_key  = _export_pbk;
 
                             Program.PgpECKeyPairGen
                             (

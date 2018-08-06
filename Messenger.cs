@@ -206,8 +206,12 @@ namespace Jarol.Console
 
         //-------------------------------------------------------------------------
 
-        private static Formated Format (string msg, int mbw = -1 /* MaxBufferWidth*/)
-        {
+        private static Formated Format 
+        (
+              string msg
+            , int    mbw    = -1 /* MaxBufferWidth*/
+            , int    offset = 0
+        ){
             Formated           r = new Formated();
             List<ConsoleColor> f = new List<ConsoleColor>();
             List<ConsoleColor> b = new List<ConsoleColor>();
@@ -222,7 +226,7 @@ namespace Jarol.Console
             b.Add(System.Console.BackgroundColor);
 
             if (mbw < 0)
-                mbw = MaxBufferWidth;
+                mbw = MaxBufferWidth - offset;
 
             msg += '\n';
             for (int n, l = mbw, i = 0, j = 0, k = 0, s = 0, t = 0, m = 0, p = 0; i < msg.Length; ++i)
@@ -557,7 +561,7 @@ namespace Jarol.Console
             , bool           bss	    											// System sounds ('\a').
             , bool           bnl												    // New line.
         ){
-            Formated _f = Messenger.Format("#### {t:5}" + msg);
+            Formated _f = Messenger.Format("#### {t:6}" + msg, -1, 1);
             bool     _b = Clean;
 
             Clean = true;
@@ -573,7 +577,7 @@ namespace Jarol.Console
             while ((i = msg.IndexOf(ColorChar)) != -1)
                 msg = msg.Remove(i, 1);
 
-            StringBuilder  sb = new StringBuilder("\n[");
+            StringBuilder  sb = new StringBuilder("\n [");
             ConsoleKeyInfo ki = new ConsoleKeyInfo();
             ConsoleColor[] cc;
 
